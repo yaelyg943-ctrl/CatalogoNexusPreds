@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPreds - Catálogo Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            --brand-blue: #1e60ff; 
+            --brand-blue-glow: rgba(30, 96, 255, 0.5);
+            --brand-dark: #05070a;
+            --brand-card: #0f121a;
+        }
+
+        body {
+            background-color: var(--brand-dark);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 96, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(30, 96, 255, 0.1) 0px, transparent 50%);
+        }
+
+        .glass-card {
+            background: var(--brand-card);
+            border: 1px solid rgba(30, 96, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--brand-blue);
+            box-shadow: 0 15px 35px -10px var(--brand-blue-glow);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--brand-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(15px);
+            background: rgba(5, 7, 10, 0.85);
+        }
+
+        .category-pill {
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .category-pill.active {
+            background: var(--brand-blue);
+            color: white;
+            box-shadow: 0 0 15px var(--brand-blue-glow);
+            border-color: transparent;
+        }
+
+        .btn-buy {
+            background: var(--brand-blue);
+            box-shadow: 0 4px 15px var(--brand-blue-glow);
+            transition: all 0.3s;
+        }
+
+        .btn-buy:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .logo-glow {
+            filter: drop-shadow(0 0 8px var(--brand-blue-glow));
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--brand-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--brand-blue); border-radius: 10px; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-mesh min-h-screen pb-20">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://api.screenshotmachine.com/?key=ca8e05&url=https%3A%2F%2Fstorage.googleapis.com%2Fstatic.invideo.io%2Fpro-ai-image-understanding%2Fimage.png-6b27552c-71dc-4518-a6b2-c090b4fb3619&device=desktop&dimension=1024x768" 
+                     onerror="image.png'; this.onerror=null;" 
+                     alt="NexusPreds Logo" 
+                     class="w-12 h-12 rounded-full logo-glow object-contain bg-white/5 p-1">
+                <div>
+                    <h1 class="font-orbitron text-xl font-bold leading-none tracking-tight">NEXUS<span class="text-blue-500">PREDS</span></h1>
+                    <span class="text-[10px] text-gray-500 tracking-[0.2em] uppercase">Premium Access</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://www.instagram.com/nexuspreds.mx?igsh=NnhxZWI3MTF0dG9u&utm_source=qr&wa_status_inline=true" target="_blank" class="text-white hover:text-blue-500 transition-colors">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <div class="hidden md:block">
+                    <div class="px-4 py-1 rounded-full border border-blue-500/30 text-[10px] font-bold text-blue-400 animate-pulse">
+                        SISTEMA OPERATIVO
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="mt-32 px-4 text-center">
+        <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-4 animate-fade-in">
+            PLATAFORMAS DIGITALES GARANTIZADAS
+        </div>
+        <h2 class="text-5xl md:text-6xl font-bold font-orbitron mb-4 animate-fade-in tracking-tighter" style="animation-delay: 0.1s">
+            NEXUS <span class="gradient-text">CATÁLOGO</span>
+        </h2>
+        <p class="text-gray-400 max-w-lg mx-auto animate-fade-in text-sm md:text-base" style="animation-delay: 0.2s">
+            Catálogo actualizado basado en lista oficial. Entrega inmediata y soporte técnico garantizado.
+        </p>
+    </section>
+
+    <!-- Filtros -->
+    <div class="mt-12 px-4 flex gap-3 overflow-x-auto pb-6 no-scrollbar container mx-auto justify-start md:justify-center animate-fade-in" style="animation-delay: 0.3s">
+        <button onclick="filterItems('all', this)" class="category-pill active px-8 py-2.5 rounded-xl whitespace-nowrap text-xs font-bold uppercase tracking-widest">Todos</button>
+        <button onclick="filterItems('streaming', this)" class="category-pill px-8 py-2.5 rounded-xl whitespace-nowrap text-xs font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10">Streaming</button>
+        <button onclick="filterItems('ia', this)" class="category-pill px-8 py-2.5 rounded-xl whitespace-nowrap text-xs font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10">I. Artificial</button>
+        <button onclick="filterItems('diseno', this)" class="category-pill px-8 py-2.5 rounded-xl whitespace-nowrap text-xs font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10">Creatividad</button>
+        <button onclick="filterItems('seguridad', this)" class="category-pill px-8 py-2.5 rounded-xl whitespace-nowrap text-xs font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10">VPN / Seguridad</button>
+    </div>
+
+    <!-- Grid de Productos -->
+    <main class="container mx-auto px-4 mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="productGrid">
+        <!-- Generado dinámicamente -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-24 py-12 border-t border-white/5 bg-black/30">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="font-orbitron font-bold text-lg mb-2">NEXUSPREDS MX</h3>
+            <p class="text-gray-500 text-sm max-w-xs mx-auto mb-6">Calidad, confianza y entrega inmediata en cada una de tus compras.</p>
+            <div class="flex justify-center gap-8 text-gray-500">
+                <a href="https://www.instagram.com/nexuspreds.mx?igsh=NnhxZWI3MTF0dG9u&utm_source=qr&wa_status_inline=true" target="_blank" class="hover:text-blue-500 transition-colors flex flex-col items-center gap-2">
+                    <i class="fab fa-instagram text-2xl"></i>
+                    <span class="text-[10px] uppercase font-bold">Instagram</span>
+                </a>
+                <button onclick="contactSupport()" class="hover:text-blue-500 transition-colors flex flex-col items-center gap-2">
+                    <i class="fas fa-headset text-2xl"></i>
+                    <span class="text-[10px] uppercase font-bold">Soporte VIP</span>
+                </button>
+            </div>
+            <p class="mt-10 text-[10px] text-gray-700 uppercase tracking-widest">© 2024 NexusPreds - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        const WHATSAPP_NUMBERS = ["529512272345", "529532097168"]; 
+
+        const products = [
+            // YouTube Premium
+            { name: "YouTube Premium", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
+            { name: "YouTube Premium", val: "3 meses", type: "Privada", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
+            { name: "YouTube Premium", val: "1 año", type: "Privada", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
+            
+            // Prime Video
+            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Prime Video (Sin Anuncios)", val: "6 meses", type: "Privada", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Prime Video (Sin Anuncios)", val: "1 año", type: "Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
+
+            // Spotify
+            { name: "Spotify Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Spotify Lifetime", val: "De por vida", type: "Privada", price: 400, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: false, invitation: false, warranty: "1 mes" },
+
+            // Netflix
+            { name: "Netflix Premium", val: "1 mes", type: "Perfil", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Netflix Premium", val: "3 meses", type: "Privada", price: 180, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Netflix Premium", val: "6 meses", type: "Compartida", price: 250, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Netflix Premium", val: "1 año", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Netflix Lifetime", val: "De por vida", type: "Privada", price: 800, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "De por vida" },
+
+            // Disney
+            { name: "Disney+", val: "1 mes", type: "Privada", price: 75, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Disney+", val: "1 mes", type: "Perfil", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Disney+ (3 ESPN)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Disney+ (7 ESPN)", val: "1 mes", type: "Perfil", price: 55, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Disney+", val: "1 año", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: false, invitation: false, warranty: "Si" },
+
+            // Gemini
+            { name: "Gemini", val: "Periodo Largo", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Gemini", val: "3 meses", type: "Privada", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Gemini", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, invitation: true, warranty: "Si" },
+
+            // CapCut
+            { name: "CapCut Premium", val: "1 mes", type: "Privada", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, invitation: false, warranty: "Si" },
+            { name: "CapCut Lifetime", val: "De por vida", type: "Privada", price: 300, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, invitation: false, warranty: "Si" },
+
+            // Vix
+            { name: "Vix", val: "1 mes", type: "Privada", price: 45, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Vix", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Vix", val: "2 meses", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Vix", val: "1 año", type: "Privada", price: 200, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: false, invitation: false, warranty: "5 meses" },
+
+            // Crunchyroll
+            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Perfil", price: 35, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Compartida", price: 380, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Crunchyroll Fan", val: "Lifetime", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "De por vida" },
+            { name: "Crunchyroll Mega Fan", val: "Lifetime", type: "Privada", price: 600, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "De por vida" },
+
+            // HBO Max
+            { name: "HBO Max Estándar", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "HBO Max Estándar", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "HBO Max", val: "12 meses", type: "Privada", price: 300, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "Si" },
+            { name: "HBO Max", val: "Lifetime", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "De por vida" },
+            { name: "HBO Max Full Access", val: "Lifetime", type: "Privada", price: 450, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "De por vida" },
+
+            // Canva
+            { name: "Canva Pro", val: "1 mes", type: "Propia", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, invitation: true, warranty: "Si" },
+            { name: "Canva Pro", val: "12 meses", type: "Privada", price: 250, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, invitation: false, warranty: "Si" },
+
+            // Paramount
+            { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Paramount+", val: "Lifetime", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: false, invitation: false, warranty: "De por vida" },
+
+            // ChatGPT
+            { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, invitation: false, warranty: "Si" },
+            { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, invitation: true, warranty: "Si" },
+            { name: "ChatGPT Plus", val: "12 meses", type: "Privada", price: 700, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, invitation: false, warranty: "Si" },
+
+            // Duolingo
+            { name: "Duolingo Plus", val: "1 mes", type: "Privada", price: 60, cat: "educacion", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, invitation: false, warranty: "Si" },
+            { name: "Duolingo Plus", val: "Lifetime", type: "Privada", price: 300, cat: "educacion", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, invitation: false, warranty: "Si" },
+
+            // Apple TV
+            { name: "Apple TV + MLS", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: true, invitation: false, warranty: "Condicional" },
+            { name: "Apple TV + MLS", val: "3 meses", type: "Privada", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, invitation: false, warranty: "Condicional" },
+            { name: "Apple TV + MLS", val: "3 meses", type: "Perfil", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, invitation: false, warranty: "Condicional" },
+
+            // VPN & Otros
+            { name: "Pure VPN", val: "1 mes", type: "Privada", price: 100, cat: "seguridad", icon: "fa-solid fa-shield", color: "#FF0000", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Nord VPN", val: "1 mes", type: "Privada", price: 100, cat: "seguridad", icon: "fa-solid fa-shield", color: "#0052cc", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Autodesk All Apps", val: "3 años", type: "Privada", price: 900, cat: "diseno", icon: "fa-solid fa-cube", color: "#0696d7", renewable: false, invitation: false, warranty: "5 meses" }
+        ];
+
+        function filterItems(category, btn) {
+            document.querySelectorAll('.category-pill').forEach(b => {
+                b.classList.remove('active');
+                b.classList.add('bg-white/5');
+            });
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/5');
+            renderProducts(category);
+        }
+
+        function getNumber() {
+            return WHATSAPP_NUMBERS[Math.floor(Math.random() * WHATSAPP_NUMBERS.length)];
+        }
+
+        function redirectToWhatsApp(productName, price) {
+            const num = getNumber();
+            const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por ${price}. ¿Me das los medios de pago?`;
+            window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function contactSupport() {
+            const num = getNumber();
+            const text = `¡Hola! Necesito soporte VIP de NexusPreds. 🛠️`;
+            window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' ? products : products.filter(p => p.cat === category);
+
+            filtered.forEach((p, i) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-5 flex flex-col h-full animate-fade-in';
+                card.style.animationDelay = `${i * 0.05}s`;
+                
+                const renewableTag = p.renewable 
+                    ? '<span class="text-[9px] text-green-400 font-bold border border-green-400/30 px-1.5 py-0.5 rounded bg-green-400/5"><i class="fas fa-sync-alt mr-1"></i>RENOVABLE</span>'
+                    : '<span class="text-[9px] text-gray-500 font-bold border border-white/5 px-1.5 py-0.5 rounded bg-white/5">CUENTA NUEVA</span>';
+
+                const invitationTag = p.invitation
+                    ? '<span class="text-[9px] text-blue-400 font-bold border border-blue-400/30 px-1.5 py-0.5 rounded bg-blue-400/5 mt-1 block w-fit ml-auto uppercase italic">Invitación a correo personal</span>'
+                    : '';
+
+                const warrantyLabel = p.warranty === "Si" ? "Total" : p.warranty;
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style="background: ${p.color}15; color: ${p.color}">
+                            <i class="${p.icon}"></i>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="text-[10px] font-black px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5 uppercase">
+                                ${p.type}
+                            </span>
+                            <div class="mt-1 flex flex-col items-end gap-1">
+                                ${renewableTag}
+                                ${invitationTag}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-lg font-bold text-white mb-1 group-hover:text-blue-400 transition-colors tracking-tight">${p.name}</h3>
+                    
+                    <div class="flex flex-col gap-2 mb-6">
+                        <div class="flex items-center gap-2 text-gray-500 text-xs">
+                            <i class="far fa-clock text-blue-500"></i>
+                            <span>${p.val} de servicio</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs">
+                            <i class="fas fa-shield-alt text-green-500"></i>
+                            <span class="text-gray-400 uppercase font-bold text-[9px]">Garantía: <span class="text-white">${warrantyLabel}</span></span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter leading-none mb-1">Precio</p>
+                            <p class="text-2xl font-orbitron font-bold text-white leading-none tracking-tighter">$${p.price}</p>
+                        </div>
+                        <button onclick="redirectToWhatsApp('${p.name}', '$${p.price}')" 
+                                class="btn-buy p-3 rounded-xl text-white">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.onload = () => renderProducts();
+    </script>
+</body>
+</html>
