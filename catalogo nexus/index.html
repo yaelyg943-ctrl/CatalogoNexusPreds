@@ -105,8 +105,7 @@
     <header class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
         <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="https://api.screenshotmachine.com/?key=ca8e05&url=https%3A%2F%2Fstorage.googleapis.com%2Fstatic.invideo.io%2Fpro-ai-image-understanding%2Fimage.png-6b27552c-71dc-4518-a6b2-c090b4fb3619&device=desktop&dimension=1024x768" 
-                     onerror="image.png'; this.onerror=null;" 
+                <img src="image.png" 
                      alt="NexusPreds Logo" 
                      class="w-12 h-12 rounded-full logo-glow object-contain bg-white/5 p-1">
                 <div>
@@ -177,90 +176,30 @@
         const WHATSAPP_NUMBERS = ["529512272345", "529532097168"]; 
 
         const products = [
-            // YouTube Premium
             { name: "YouTube Premium", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
             { name: "YouTube Premium", val: "3 meses", type: "Privada", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
             { name: "YouTube Premium", val: "1 año", type: "Privada", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, invitation: false, warranty: "Si" },
-            
-            // Prime Video
-            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, invitation: false, warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "6 meses", type: "Privada", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, invitation: false, warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "1 año", type: "Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
-
-            // Spotify
+            { name: "Prime Video", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Prime Video", val: "1 año", type: "Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, invitation: false, warranty: "Si" },
             { name: "Spotify Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Spotify Lifetime", val: "De por vida", type: "Privada", price: 400, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: false, invitation: false, warranty: "1 mes" },
-
-            // Netflix
             { name: "Netflix Premium", val: "1 mes", type: "Perfil", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Netflix Premium", val: "3 meses", type: "Privada", price: 180, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
-            { name: "Netflix Premium", val: "6 meses", type: "Compartida", price: 250, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
             { name: "Netflix Premium", val: "1 año", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "Si" },
             { name: "Netflix Lifetime", val: "De por vida", type: "Privada", price: 800, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, invitation: false, warranty: "De por vida" },
-
-            // Disney
-            { name: "Disney+", val: "1 mes", type: "Privada", price: 75, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
             { name: "Disney+", val: "1 mes", type: "Perfil", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Disney+ (3 ESPN)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Disney+ (7 ESPN)", val: "1 mes", type: "Perfil", price: 55, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Disney+", val: "1 año", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: false, invitation: false, warranty: "Si" },
-
-            // Gemini
-            { name: "Gemini", val: "Periodo Largo", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: false, invitation: false, warranty: "Si" },
-            { name: "Gemini", val: "3 meses", type: "Privada", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, invitation: false, warranty: "Si" },
             { name: "Gemini", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, invitation: true, warranty: "Si" },
-
-            // CapCut
             { name: "CapCut Premium", val: "1 mes", type: "Privada", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, invitation: false, warranty: "Si" },
-            { name: "CapCut Lifetime", val: "De por vida", type: "Privada", price: 300, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, invitation: false, warranty: "Si" },
-
-            // Vix
-            { name: "Vix", val: "1 mes", type: "Privada", price: 45, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Vix", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Vix", val: "2 meses", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, invitation: false, warranty: "Si" },
             { name: "Vix", val: "1 año", type: "Privada", price: 200, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: false, invitation: false, warranty: "5 meses" },
-
-            // Crunchyroll
-            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Perfil", price: 35, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Compartida", price: 380, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "Si" },
             { name: "Crunchyroll Fan", val: "Lifetime", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "De por vida" },
-            { name: "Crunchyroll Mega Fan", val: "Lifetime", type: "Privada", price: 600, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, invitation: false, warranty: "De por vida" },
-
-            // HBO Max
-            { name: "HBO Max Estándar", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, invitation: false, warranty: "Si" },
-            { name: "HBO Max Estándar", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, invitation: false, warranty: "Si" },
-            { name: "HBO Max", val: "12 meses", type: "Privada", price: 300, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "Si" },
             { name: "HBO Max", val: "Lifetime", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "De por vida" },
-            { name: "HBO Max Full Access", val: "Lifetime", type: "Privada", price: 450, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, invitation: false, warranty: "De por vida" },
-
-            // Canva
-            { name: "Canva Pro", val: "1 mes", type: "Propia", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, invitation: true, warranty: "Si" },
             { name: "Canva Pro", val: "12 meses", type: "Privada", price: 250, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, invitation: false, warranty: "Si" },
-
-            // Paramount
-            { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Paramount+", val: "Lifetime", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: false, invitation: false, warranty: "De por vida" },
-
-            // ChatGPT
+            
+            // ACTUALIZACIÓN PARAMOUNT: Icono de montaña
+            { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain", color: "#0064FF", renewable: true, invitation: false, warranty: "Si" },
+            { name: "Paramount+", val: "Lifetime", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain", color: "#0064FF", renewable: false, invitation: false, warranty: "De por vida" },
+            
             { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, invitation: false, warranty: "Si" },
-            { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, invitation: true, warranty: "Si" },
-            { name: "ChatGPT Plus", val: "12 meses", type: "Privada", price: 700, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, invitation: false, warranty: "Si" },
-
-            // Duolingo
-            { name: "Duolingo Plus", val: "1 mes", type: "Privada", price: 60, cat: "educacion", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, invitation: false, warranty: "Si" },
             { name: "Duolingo Plus", val: "Lifetime", type: "Privada", price: 300, cat: "educacion", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, invitation: false, warranty: "Si" },
-
-            // Apple TV
-            { name: "Apple TV + MLS", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: true, invitation: false, warranty: "Condicional" },
-            { name: "Apple TV + MLS", val: "3 meses", type: "Privada", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, invitation: false, warranty: "Condicional" },
-            { name: "Apple TV + MLS", val: "3 meses", type: "Perfil", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, invitation: false, warranty: "Condicional" },
-
-            // VPN & Otros
-            { name: "Pure VPN", val: "1 mes", type: "Privada", price: 100, cat: "seguridad", icon: "fa-solid fa-shield", color: "#FF0000", renewable: true, invitation: false, warranty: "Si" },
-            { name: "Nord VPN", val: "1 mes", type: "Privada", price: 100, cat: "seguridad", icon: "fa-solid fa-shield", color: "#0052cc", renewable: true, invitation: false, warranty: "Si" },
             { name: "Autodesk All Apps", val: "3 años", type: "Privada", price: 900, cat: "diseno", icon: "fa-solid fa-cube", color: "#0696d7", renewable: false, invitation: false, warranty: "5 meses" }
         ];
 
@@ -280,7 +219,7 @@
 
         function redirectToWhatsApp(productName, price) {
             const num = getNumber();
-            const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por ${price}. ¿Me das los medios de pago?`;
+            const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por $${price}. ¿Me das los medios de pago?`;
             window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -293,7 +232,6 @@
         function renderProducts(category = 'all') {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-
             const filtered = category === 'all' ? products : products.filter(p => p.cat === category);
 
             filtered.forEach((p, i) => {
@@ -305,10 +243,6 @@
                     ? '<span class="text-[9px] text-green-400 font-bold border border-green-400/30 px-1.5 py-0.5 rounded bg-green-400/5"><i class="fas fa-sync-alt mr-1"></i>RENOVABLE</span>'
                     : '<span class="text-[9px] text-gray-500 font-bold border border-white/5 px-1.5 py-0.5 rounded bg-white/5">CUENTA NUEVA</span>';
 
-                const invitationTag = p.invitation
-                    ? '<span class="text-[9px] text-blue-400 font-bold border border-blue-400/30 px-1.5 py-0.5 rounded bg-blue-400/5 mt-1 block w-fit ml-auto uppercase italic">Invitación a correo personal</span>'
-                    : '';
-
                 const warrantyLabel = p.warranty === "Si" ? "Total" : p.warranty;
 
                 card.innerHTML = `
@@ -316,23 +250,18 @@
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style="background: ${p.color}15; color: ${p.color}">
                             <i class="${p.icon}"></i>
                         </div>
-                        <div class="flex flex-col items-end">
-                            <span class="text-[10px] font-black px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5 uppercase">
-                                ${p.type}
-                            </span>
-                            <div class="mt-1 flex flex-col items-end gap-1">
-                                ${renewableTag}
-                                ${invitationTag}
-                            </div>
+                        <div class="flex flex-col items-end text-[10px] font-black px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5 uppercase">
+                            ${p.type}
                         </div>
                     </div>
                     
-                    <h3 class="text-lg font-bold text-white mb-1 group-hover:text-blue-400 transition-colors tracking-tight">${p.name}</h3>
+                    <h3 class="text-lg font-bold text-white mb-1 tracking-tight">${p.name}</h3>
+                    <div class="mb-4">${renewableTag}</div>
                     
                     <div class="flex flex-col gap-2 mb-6">
                         <div class="flex items-center gap-2 text-gray-500 text-xs">
                             <i class="far fa-clock text-blue-500"></i>
-                            <span>${p.val} de servicio</span>
+                            <span>${p.val}</span>
                         </div>
                         <div class="flex items-center gap-2 text-xs">
                             <i class="fas fa-shield-alt text-green-500"></i>
@@ -342,10 +271,10 @@
 
                     <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
                         <div>
-                            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter leading-none mb-1">Precio</p>
-                            <p class="text-2xl font-orbitron font-bold text-white leading-none tracking-tighter">$${p.price}</p>
+                            <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Precio</p>
+                            <p class="text-2xl font-orbitron font-bold text-white">$${p.price}</p>
                         </div>
-                        <button onclick="redirectToWhatsApp('${p.name}', '$${p.price}')" 
+                        <button onclick="redirectToWhatsApp('${p.name}', '${p.price}')" 
                                 class="btn-buy p-3 rounded-xl text-white">
                             <i class="fab fa-whatsapp text-xl"></i>
                         </button>
@@ -354,8 +283,7 @@
                 grid.appendChild(card);
             });
         }
-
-        window.onload = () => renderProducts();
+        window.onload = renderProducts;
     </script>
 </body>
 </html>
