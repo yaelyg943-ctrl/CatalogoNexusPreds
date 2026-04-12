@@ -98,7 +98,6 @@
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
 
-        /* Estilo para Galería Automática de diferentes tamaños */
         .masonry-grid {
             column-count: 1;
             column-gap: 1rem;
@@ -178,7 +177,7 @@
         <!-- Generado dinámicamente -->
     </main>
 
-    <!-- SECCIÓN DE REFERENCIAS (AUTO-AJUSTABLE) -->
+    <!-- SECCIÓN DE REFERENCIAS -->
     <section id="referencesSection" class="hidden container mx-auto px-4 mt-4 animate-fade-in pb-20">
         <div class="glass-card rounded-3xl p-6 sm:p-8">
             <div class="mb-10 text-center">
@@ -187,13 +186,12 @@
             </div>
             
             <div class="masonry-grid" id="masonryContainer">
-                <!-- FOTO 1 -->
                 <div class="masonry-item">
                     <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                         <img src="refe1.png" alt="Referencia" class="w-full h-auto block">
                     </div>
                 </div>
-         <div class="masonry-item">
+                <div class="masonry-item">
                     <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                         <img src="refe2.png" alt="Referencia" class="w-full h-auto block">
                     </div>
@@ -203,7 +201,7 @@
                         <img src="refe3.png" alt="Referencia" class="w-full h-auto block">
                     </div>
                 </div>
-         <div class="masonry-item">
+                <div class="masonry-item">
                     <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                         <img src="refe4.png" alt="Referencia" class="w-full h-auto block">
                     </div>
@@ -213,12 +211,11 @@
                         <img src="refe5.png" alt="Referencia" class="w-full h-auto block">
                     </div>
                 </div>
-         <div class="masonry-item">
+                <div class="masonry-item">
                     <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                         <img src="refe6.png" alt="Referencia" class="w-full h-auto block">
                     </div>
                 </div>
-                <!-- Añade más fotos aquí siguiendo la estructura masonry-item -->
             </div>
         </div>
     </section>
@@ -242,7 +239,16 @@
     </footer>
 
     <script>
+        // CONFIGURACIÓN DE NÚMEROS
         const WHATSAPP_NUMBERS = ["529512272345", "529532097168"]; 
+
+        /**
+         * Obtiene un número aleatorio de la lista disponible (Distribución 50/50)
+         */
+        function getRandomNumber() {
+            const randomIndex = Math.floor(Math.random() * WHATSAPP_NUMBERS.length);
+            return WHATSAPP_NUMBERS[randomIndex];
+        }
 
         const products = [
             // YOUTUBE
@@ -384,13 +390,15 @@
         }
 
         function redirectToWhatsApp(productName, price) {
-            const num = WHATSAPP_NUMBERS[0];
+            // USAR NÚMERO ALEATORIO PARA COMPRAS
+            const num = getRandomNumber();
             const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por ${price}. ¿Qué sigue?`;
             window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function contactSupport() {
-            const num = WHATSAPP_NUMBERS[0];
+            // USAR NÚMERO ALEATORIO PARA SOPORTE
+            const num = getRandomNumber();
             window.open(`https://wa.me/${num}?text=Soporte+Nexus`, '_blank');
         }
 
@@ -399,7 +407,6 @@
             grid.innerHTML = '';
             const filtered = category === 'all' ? products : products.filter(p => p.cat === category);
 
-            // Ordenar para mostrar los nuevos productos primero
             filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
 
             filtered.forEach((p, i) => {
