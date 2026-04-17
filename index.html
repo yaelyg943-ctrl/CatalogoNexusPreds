@@ -251,107 +251,108 @@
         }
 
         const products = [
-            // YOUTUBE
-            { name: "YouTube Premium", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "YouTube Premium", val: "3 meses", type: "Privada", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "YouTube Premium", val: "1 año", type: "Privada", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    // YOUTUBE
+    { name: "YouTube Premium", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "YouTube Premium", val: "1 mes", type: "Cuenta Propia", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: true, delivery: "Invitación", warranty: "Si" },
+    { name: "YouTube Premium", val: "3 meses", type: "Privada", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "YouTube Premium", val: "1 año", type: "Privada", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // PRIME VIDEO
-            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "6 meses", type: "Privada", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Prime Video (Sin Anuncios)", val: "1 año", type: "Cuenta Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Cuenta Propia", warranty: "Si" },
+    // PRIME VIDEO
+    { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Prime Video (Sin Anuncios)", val: "6 meses", type: "Privada", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Prime Video (Sin Anuncios)", val: "1 año", type: "Cuenta Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "Cuenta Propia", warranty: "Si" },
 
-            // SPOTIFY
-            { name: "Spotify Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Spotify Premium", val: "De por vida", type: "Privada", price: 400, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: false, delivery: "Correo/Contraseña", warranty: "24 Hrs" },
+    // SPOTIFY
+    { name: "Spotify Premium", val: "1 mes", type: "Nueva", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "1 mes", type: "Cuenta Propia", price: 80, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "3 meses", type: "Nueva", price: 150, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "3 meses", type: "Cuenta Propia", price: 200, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "6 meses", type: "Nueva", price: 250, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "6 meses", type: "Cuenta Propia", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "1 año", type: "Nueva", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Spotify Premium", val: "1 año", type: "Cuenta Propia", price: 500, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // NETFLIX
-            { name: "Netflix Premium", val: "1 mes", type: "Perfil", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Netflix Premium", val: "3 meses", type: "Privada", price: 180, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Netflix Premium", val: "6 meses", type: "Compartida", price: 250, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Netflix Premium", val: "1 año", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Netflix Premium", val: "De por vida", type: "Privada", price: 800, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
+    // NETFLIX
+    { name: "Netflix Premium", val: "1 mes", type: "Perfil", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Netflix Premium", val: "1 mes", type: "Privada", price: 170, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // DISNEY
-            { name: "Disney+", val: "1 mes", type: "Privada", price: 75, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Disney+", val: "1 mes", type: "Perfil", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Disney+ (3 ESPN)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Disney+ (7 ESPN)", val: "1 mes", type: "Perfil", price: 55, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Disney+", val: "1 año", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    // DISNEY
+    { name: "Disney+", val: "1 mes", type: "Privada", price: 75, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Disney+", val: "1 mes", type: "Perfil", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Disney+ (3 ESPN)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Disney+ (7 ESPN)", val: "1 mes", type: "Perfil", price: 55, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Disney+", val: "1 año", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // GEMINI
-            { name: "Gemini", val: "1 año", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Gemini", val: "3 meses", type: "Privada", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Gemini", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Invitación", warranty: "Si" },
+    // GEMINI
+    { name: "Gemini", val: "1 año", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Gemini", val: "3 meses", type: "Privada", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Gemini", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Invitación", warranty: "Si" },
 
-            // CAPCUT
-            { name: "CapCut Premium", val: "1 mes", type: "Privada", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 400, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 300, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    // CAPCUT
+    { name: "CapCut Premium", val: "1 mes", type: "Privada", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 400, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 300, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // VIX
-            { name: "Vix Premium", val: "1 mes", type: "Privada", price: 45, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Vix Premium", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Vix Premium", val: "2 meses", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Vix Premium", val: "1 año", type: "Privada", price: 200, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: false, delivery: "Correo/Contraseña", warranty: "5 meses" },
+    // VIX
+    { name: "Vix Premium", val: "1 mes", type: "Privada", price: 45, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Vix Premium", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Vix Premium", val: "2 meses", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Vix Premium", val: "1 año", type: "Privada", price: 200, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: false, delivery: "Correo/Contraseña", warranty: "5 Meses" },
 
-            // CRUNCHYROLL
-            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Perfil", price: 35, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Compartida", price: 380, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Crunchyroll Fan", val: "De por vida", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
-            { name: "Crunchyroll Mega Fan", val: "De por vida", type: "Privada", price: 600, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
+    // CRUNCHYROLL
+    { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Perfil", price: 35, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Compartida", price: 380, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Crunchyroll Fan", val: "12 meses", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Privada", price: 600, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // HBO MAX
-            { name: "HBO Max Estándar", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "HBO Max Estándar", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "HBO Max", val: "12 meses", type: "Privada", price: 300, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "HBO Max", val: "De por vida", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
-            { name: "HBO Max Full Access", val: "De por vida", type: "Privada", price: 450, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
+    // HBO MAX
+    { name: "HBO Max Estándar", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "HBO Max Estándar", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "HBO Max", val: "12 meses", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
+    { name: "HBO Max Full Access", val: "12 meses", type: "Privada", price: 450, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
 
-            // CANVA
-            { name: "Canva Pro", val: "1 mes", type: "Cuenta Propia", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
-            { name: "Canva Pro", val: "12 meses", type: "Privada", price: 250, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    // CANVA
+    { name: "Canva Pro", val: "1 mes", type: "Cuenta Propia", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
+    { name: "Canva Pro", val: "3 meses", type: "Cuenta Propia", price: 130, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
+    { name: "Canva Pro", val: "6 meses", type: "Cuenta Propia", price: 190, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
+    { name: "Canva Pro", val: "12 meses", type: "Cuenta Propia", price: 400, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
+    { name: "Canva Pro", val: "12 meses", type: "Privada", price: 340, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // PARAMOUNT+
-            { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Paramount+", val: "De por vida", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
+    // PARAMOUNT+
+    { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Paramount+", val: "12 meses", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // CHATGPT
-            { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, delivery: "Invitación", warranty: "Si" },
-            { name: "ChatGPT Plus", val: "12 meses", type: "Privada", price: 700, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "ChatGPT Plus", val: "12 meses", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, delivery: "Clave Activación", warranty: "Si" },
+    // CHATGPT
+    { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "ChatGPT Go", val: "12 meses", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, delivery: "Clave Activación", warranty: "Si" },
 
-            // DUOLINGO
-            { name: "Duolingo Plus", val: "1 mes", type: "Privada", price: 60, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-            { name: "Duolingo Plus", val: "Lifetime", type: "Privada", price: 300, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    // DUOLINGO
+    { name: "Duolingo Plus", val: "1 mes", type: "Privada", price: 60, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+    { name: "Duolingo Plus", val: "3 meses", type: "Privada", price: 300, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
 
-            // APPLE TV
-            { name: "Apple TV con MLS", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
-            { name: "Apple TV con MLS", val: "3 meses", type: "Privada", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
-            { name: "Apple TV con MLS", val: "3 meses", type: "Perfil", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
+    // APPLE TV
+    { name: "Apple TV con MLS", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
+    { name: "Apple TV con MLS", val: "3 meses", type: "Privada", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
+    { name: "Apple TV con MLS", val: "3 meses", type: "Perfil", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
 
-            // AUTODESK
-            { name: "Autodesk All Apps", val: "3 años", type: "Privada", price: 900, cat: "diseno", icon: "fa-solid fa-cube", color: "#0696d7", renewable: false, delivery: "Correo/Contraseña", warranty: "Meses Garantía", isNew: true },
+    // AUTODESK
+    { name: "Autodesk All Apps", val: "3 años", type: "Privada", price: 900, cat: "diseno", icon: "fa-solid fa-cube", color: "#0696d7", renewable: false, delivery: "Correo/Contraseña", warranty: "Meses Garantía", isNew: true },
 
-            // VPN
-            { name: "Pure VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#FF0000", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-            { name: "Nord VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#0052cc", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
+    // VPN
+    { name: "Pure VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#FF0000", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
+    { name: "Nord VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#0052cc", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
 
-            // APPLE MUSIC
-            { name: "Apple Music", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-solid fa-music", color: "#FF2D55", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
+    // DEEZER
+    { name: "Deezer Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
+    { name: "Deezer Premium", val: "2 meses", type: "Privada", price: 100, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
+    { name: "Deezer Premium", val: "4 meses", type: "Privada", price: 170, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
 
-            // DEEZER
-            { name: "Deezer Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-            { name: "Deezer Premium", val: "2 meses", type: "Privada", price: 100, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-            { name: "Deezer Premium", val: "4 meses", type: "Privada", price: 170, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-
-            // WONDERSHARE
-            { name: "Wondershare", val: "1 año", type: "Privada", price: 500, cat: "diseno", icon: "fa-solid fa-wand-magic-sparkles", color: "#00A3E0", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true }
-        ];
+    // WONDERSHARE
+    { name: "Wondershare", val: "1 año", type: "Privada", price: 500, cat: "diseno", icon: "fa-solid fa-wand-magic-sparkles", color: "#00A3E0", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true }
+];
 
         function toggleReferences() {
             const refSection = document.getElementById('referencesSection');
