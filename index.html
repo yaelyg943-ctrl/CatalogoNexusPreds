@@ -21,21 +21,74 @@
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* --- ANIMATED BACKGROUND --- */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #0a0e1a 0%, #05070a 100%);
+        }
+
+        .bg-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(rgba(30, 96, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 96, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(15deg);
+            animation: gridMove 40s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from { transform: perspective(500px) rotateX(15deg) translateY(0); }
+            to { transform: perspective(500px) rotateX(15deg) translateY(50px); }
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(1px);
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+            50% { transform: translateY(-100px) translateX(20px); opacity: 0.6; }
+        }
+
+        .glow-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(30, 96, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+        }
+
+        /* --- UI COMPONENTS --- */
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
-        .bg-mesh {
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(30, 96, 255, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(30, 96, 255, 0.1) 0px, transparent 50%);
-        }
-
         .glass-card {
-            background: var(--brand-card);
+            background: rgba(15, 18, 26, 0.8);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(30, 96, 255, 0.15);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            cursor: pointer;
         }
 
         .glass-card:hover {
@@ -79,6 +132,22 @@
             transform: scale(1.05);
         }
 
+        /* --- MODAL STYLES --- */
+        #modalOverlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-active .modal-content {
+            transform: scale(1);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -114,7 +183,29 @@
         }
     </style>
 </head>
-<body class="bg-mesh min-h-screen pb-20">
+<body class="min-h-screen pb-20">
+
+    <!-- Fondo Animado -->
+    <div class="bg-container">
+        <div class="bg-grid"></div>
+        <div class="glow-sphere" style="top: -10%; left: -10%;"></div>
+        <div class="glow-sphere" style="bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(138, 43, 226, 0.05) 0%, transparent 70%);"></div>
+        <div id="particles-host"></div>
+    </div>
+
+    <!-- Modal de Descripción -->
+    <div id="modalOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden opacity-0 transition-all">
+        <div class="modal-content w-full max-w-lg glass-card rounded-3xl p-8 relative overflow-hidden" onclick="event.stopPropagation()">
+            <!-- Botón Cerrar -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div id="modalBody">
+                <!-- Contenido Dinámico -->
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="fixed top-0 w-full z-50 nav-blur border-b border-white/5">
@@ -139,7 +230,6 @@
 
     <!-- Hero -->
     <section id="heroSection" class="mt-32 px-4 text-center">
-        <!-- BANNER NUEVOS PRODUCTOS -->
         <div class="mb-6 w-full max-w-2xl mx-auto rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 p-[1px] animate-fade-in shadow-[0_0_20px_rgba(30,96,255,0.4)]">
             <div class="bg-black/50 backdrop-blur-md rounded-xl py-2 px-4 flex items-center justify-center gap-3">
                 <span class="animate-bounce text-lg md:text-xl">🚀</span>
@@ -174,48 +264,21 @@
 
     <!-- Grid de Productos -->
     <main class="container mx-auto px-4 mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20" id="productGrid">
-        <!-- Generado dinámicamente -->
     </main>
 
     <!-- SECCIÓN DE REFERENCIAS -->
     <section id="referencesSection" class="hidden container mx-auto px-4 mt-4 animate-fade-in pb-20">
-        <div class="glass-card rounded-3xl p-6 sm:p-8">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 cursor-default">
             <div class="mb-10 text-center">
                 <h3 class="font-orbitron text-3xl font-bold mb-2 gradient-text uppercase">Galería de Éxito</h3>
                 <p class="text-gray-500 text-xs uppercase tracking-[0.3em]">Evidencia Real de Clientes Satisfechos</p>
             </div>
             
             <div class="masonry-grid" id="masonryContainer">
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe1.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe2.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe3.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe4.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe5.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
-                <div class="masonry-item">
-                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                        <img src="refe6.png" alt="Referencia" class="w-full h-auto block">
-                    </div>
-                </div>
+                <!-- Imagenes de referencia -->
+                <div class="masonry-item"><div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5"><img src="refe1.png" alt="Ref" class="w-full"></div></div>
+                <div class="masonry-item"><div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5"><img src="refe2.png" alt="Ref" class="w-full"></div></div>
+                <div class="masonry-item"><div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5"><img src="refe3.png" alt="Ref" class="w-full"></div></div>
             </div>
         </div>
     </section>
@@ -239,170 +302,159 @@
     </footer>
 
     <script>
-        // CONFIGURACIÓN DE NÚMEROS
         const WHATSAPP_NUMBERS = ["529512272345", "529532097168"]; 
 
-        /**
-         * Obtiene un número aleatorio de la lista disponible (Distribución 50/50)
-         */
         function getRandomNumber() {
             const randomIndex = Math.floor(Math.random() * WHATSAPP_NUMBERS.length);
             return WHATSAPP_NUMBERS[randomIndex];
         }
 
         const products = [
-    // YOUTUBE
-    { name: "YouTube Premium", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "YouTube Premium", val: "1 mes", type: "Cuenta Propia", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: true, delivery: "Invitación", warranty: "Si" },
-    { name: "YouTube Premium", val: "3 meses", type: "Privada", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "YouTube Premium", val: "1 año", type: "Privada", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
+            |
+  // CATEGORÍA: STREAMING (Página 1)
+  { name: "Youtube premium", val: "1 mes", type: "PRIVADA", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus creadores favoritos. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cero anuncios", "Reproducción background", "Descargas offline", "Alta resolución"] }, // [cite: 2]
+  { name: "Youtube premium", val: "1 mes", type: "CUENTA PROPIA", price: 50, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: true, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus creadores favoritos. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cero anuncios", "Reproducción background", "Descargas offline", "Alta resolución"] }, // [cite: 2]
+  { name: "Youtube premium", val: "3 meses", type: "PRIVADA", price: 140, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus creadores favoritos. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cero anuncios", "Reproducción background", "Descargas offline", "Alta resolución"] }, // [cite: 2]
+  { name: "Youtube premium", val: "1 año", type: "PRIVADA", price: 550, cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus creadores favoritos. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cero anuncios", "Reproducción background", "Descargas offline", "Alta resolución"] }, // [cite: 2]
+  { name: "Prime Video (sin anuncios)", val: "1 mes", type: "POR PERFIL", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad HD/4K", "Sin comerciales", "Catálogo exclusivo", "Estrenos premium"] }, // [cite: 2]
+  { name: "Prime Video (sin anuncios)", val: "1 mes", type: "PRIVADA", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad HD/4K", "Sin comerciales", "Catálogo exclusivo", "Estrenos premium"] }, // [cite: 2]
+  { name: "Prime Video (sin anuncios)", val: "6 meses", type: "PRIVADA", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad HD/4K", "Sin comerciales", "Catálogo exclusivo", "Estrenos premium"] }, // [cite: 2]
+  { name: "Prime Video (sin anuncios)", val: "1 año", type: "CUENTA PROPIA", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "CUENTA PROPIA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad HD/4K", "Sin comerciales", "Catálogo exclusivo", "Estrenos premium"] }, // [cite: 2]
+  { name: "Spotify", val: "1 MES", type: "PRIVADA", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "1 MES", type: "CUENTA PROPIA", price: 80, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "3 MESES", type: "PRIVADA", price: 150, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "3 MESES", type: "CUENTA PROPIA", price: 200, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "6 MESES", type: "PRIVADA", price: 250, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "6 MESES", type: "CUENTA PROPIA", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "1 AÑO", type: "PRIVADA", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Spotify", val: "1 AÑO", type: "CUENTA PROPIA", price: 500, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Alta Fidelidad", "Cero publicidad", "Descargas offline", "Playlists infinitas"] }, // [cite: 2]
+  { name: "Netflix", val: "1 mes", type: "PERFIL", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad máxima", "Catálogo global", "Cero anuncios", "Modo descargas"] }, // [cite: 2]
+  { name: "Netflix", val: "1 mes", type: "PERFIL", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad máxima", "Catálogo global", "Cero anuncios", "Modo descargas"] }, // [cite: 2]
+  { name: "Netflix estandar sin anuncion", val: "1 mes", type: "PRIVADA", price: 170, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad HD", "Cuenta propia", "Sin anuncios", "Descargas activas"] }, // [cite: 2]
+  { name: "Disney estandar", val: "1 MES", type: "PRIVADA", price: 75, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Estándar HD", "Magia sin límites", "Catálogo Disney", "Perfiles estables"] }, // [cite: 2]
+  { name: "Disney premium", val: "1 MES", type: "PERFIL", price: 45, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad 4K", "Audio inmersivo", "Catálogo Disney+", "Cero anuncios"] }, // [cite: 2]
+  { name: "Disney CON 3 ESPN", val: "1 MES", type: "PERFIL", price: 50, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad 4K", "Catálogo Disney+", "Deportes ESPN", "Cero anuncios"] }, // [cite: 2]
+  { name: "Disney CON 7 ESPN", val: "1 MES", type: "PERFIL", price: 55, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Calidad 4K", "Catálogo Disney+", "Deportes 7 ESPN", "Cero anuncios"] }, // [cite: 2]
+  { name: "Disney plus premium", val: "1 MES", type: "PRIVADA", price: 120, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cuenta total", "Calidad 4K", "Audio Dolby", "Catálogo completo"] }, // [cite: 2]
+  { name: "Disney", val: "1 AÑO", type: "PRIVADA", price: 350, cat: "streaming", icon: "fa-brands fa-disney", color: "#000000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Acceso anual", "Calidad máxima", "Catálogo Disney", "Descargas offline"] }, // [cite: 2]
+  { name: "GEMINI", val: "1 AÑO", type: "PRIVADA", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#1A73E8", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en inteligencia artificial de última generación. Tendrás acceso total a modelos avanzados para resolver tareas. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["IA Avanzada", "Respuestas lógicas", "Generación fluida", "Integración total"] }, // [cite: 2]
+  { name: "GEMINI", val: "3 MESES", type: "PRIVADA", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#1A73E8", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en inteligencia artificial de última generación. Tendrás acceso total a modelos avanzados para resolver tareas. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["IA Avanzada", "Respuestas lógicas", "Generación fluida", "Integración total"] }, // [cite: 2]
+  { name: "GEMINI", val: "1 MES", type: "PRIVADA", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#1A73E8", renewable: true, delivery: "POR INVITACIÓN", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en inteligencia artificial de última generación. Tendrás acceso total a modelos avanzados para resolver tareas. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["IA Avanzada", "Respuestas lógicas", "Generación fluida", "Integración total"] }, // [cite: 2]
+  { name: "CAPCUT PREMIUM", val: "1 MES", type: "PRIVA", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Exportación 4K", "Herramientas IA", "Efectos PRO", "Sin marca de agua"] }, // [cite: 2]
+  { name: "CAPCUT PREMIUM", val: "3 MESES", type: "PRIVA", price: 200, cat: "diseno", icon: "fa-solid fa-video", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Exportación 4K", "Herramientas IA", "Efectos PRO", "Sin marca de agua"] }, // [cite: 2]
+  { name: "CAPCUT PREMIUM", val: "6 MESES", type: "PRIVA", price: 280, cat: "diseno", icon: "fa-solid fa-video", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Exportación 4K", "Herramientas IA", "Efectos PRO", "Sin marca de agua"] }, // [cite: 2]
+  { name: "CAPCUT PREMIUM", val: "1 AÑO", type: "PIRVADA", price: 400, cat: "diseno", icon: "fa-solid fa-video", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Exportación 4K", "Herramientas IA", "Efectos PRO", "Sin marca de agua"] }, // [cite: 2]
+  { name: "Vix", val: "1 mes", type: "PRIVADA", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#FF6B00", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo Premium", "Deportes en vivo", "Calidad HD", "Múltiples pantallas"] }, // [cite: 2]
+  { name: "Vix", val: "1 mes", type: "PERFIL", price: 25, cat: "streaming", icon: "fa-solid fa-play", color: "#FF6B00", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo Premium", "Deportes en vivo", "Calidad HD", "Acceso individual"] }, // [cite: 2]
+  { name: "Vix", val: "2 meses", type: "PRIVADA", price: 80, cat: "streaming", icon: "fa-solid fa-play", color: "#FF6B00", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo Premium", "Deportes en vivo", "Calidad HD", "Múltiples pantallas"] }, // [cite: 2]
+  { name: "Vix", val: "1 año", type: "PRIVADA", price: 200, cat: "streaming", icon: "fa-solid fa-play", color: "#FF6B00", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "5 MESES", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo Premium", "Deportes en vivo", "Calidad HD", "Plan anual"] }, // [cite: 2]
+  { name: "Crochirrall MEGA FAN", val: "1 mes", type: "PERFIL", price: 35, cat: "streaming", icon: "fa-solid fa-film", color: "#F47521", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Anime en HD", "Cero anuncios", "Simulcasts", "Descargas offline"] }, // [cite: 2]
+  { name: "Crochirroll MEGA FAN", val: "1 mes", type: "PRIVADA", price: 80, cat: "streaming", icon: "fa-solid fa-film", color: "#F47521", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Anime en HD", "Cero anuncios", "Simulcasts", "Descargas offline"] }, // [cite: 2]
 
-    // PRIME VIDEO
-    { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Prime Video (Sin Anuncios)", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Prime Video (Sin Anuncios)", val: "6 meses", type: "Privada", price: 260, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Prime Video (Sin Anuncios)", val: "1 año", type: "Cuenta Propia", price: 450, cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "Cuenta Propia", warranty: "Si" },
+  // CATEGORÍA: STREAMING Y HERRAMIENTAS (Página 2)
+  { name: "Crochirroll MEGA FAN", val: "12 MESES", type: "COMPARTIDA CON ACCESO/ UN PERFIL", price: 380, cat: "streaming", icon: "fa-solid fa-film", color: "#F47521", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Anime en HD", "Cero anuncios", "Simulcasts", "Plan anual"] }, // [cite: 3]
+  { name: "Crochirroll FAN", val: "12 MESES", type: "PRIVADA", price: 400, cat: "streaming", icon: "fa-solid fa-film", color: "#F47521", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Anime en HD", "Cero anuncios", "Simulcasts", "Plan anual"] }, // [cite: 3]
+  { name: "Crochirrall MEGA FAN", val: "12 MESES", type: "PRIVADA", price: 600, cat: "streaming", icon: "fa-solid fa-film", color: "#F47521", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Anime en HD", "Cero anuncios", "Simulcasts", "Descargas offline"] }, // [cite: 3]
+  { name: "HBO MAX ESTANDAR", val: "1 MES", type: "PERFIL", price: 30, cat: "streaming", icon: "fa-solid fa-h", color: "#5A2E8A", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Estrenos VIP", "Calidad superior", "Descargas móviles", "Cero anuncios"] }, // [cite: 3]
+  { name: "HBO MAX ESTANDAR", val: "1 MES", type: "PRIVADA", price: 50, cat: "streaming", icon: "fa-solid fa-h", color: "#5A2E8A", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Estrenos VIP", "Calidad superior", "Descargas móviles", "Cero anuncios"] }, // [cite: 3]
+  { name: "НВО МАХ", val: "12 MESES", type: "PRIVADA", price: 350, cat: "streaming", icon: "fa-solid fa-h", color: "#5A2E8A", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Estrenos VIP", "Calidad superior", "Descargas móviles", "Cero anuncios"] }, // [cite: 3]
+  { name: "CANVA", val: "1 MES", type: "CUENTA PROPIA", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "CORREO DE INVITACIÓN", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Kit de marca", "Librería Premium", "Exportación PRO", "Herramientas IA"] }, // [cite: 3]
+  { name: "CANVA", val: "3 MESES", type: "CUENTA PROPIA", price: 130, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "CORREO DE INVITACIÓN", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Kit de marca", "Librería Premium", "Exportación PRO", "Herramientas IA"] }, // [cite: 3]
+  { name: "CANVA", val: "6 MESES", type: "CUENTA PROPIA", price: 190, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "CORREO DE INVITACIÓN", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Kit de marca", "Librería Premium", "Exportación PRO", "Herramientas IA"] }, // [cite: 3]
+  { name: "CANVA", val: "12 MESES", type: "CUENTA PROPIA", price: 400, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "CORREO DE INVITACIÓN", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Kit de marca", "Librería Premium", "Exportación PRO", "Herramientas IA"] }, // [cite: 3]
+  { name: "CANVA", val: "12 MESES", type: "PRIVADA", price: 340, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Kit de marca", "Librería Premium", "Exportación PRO", "Herramientas IA"] }, // [cite: 3]
+  { name: "Paramount+", val: "1 MES", type: "PRIVADA", price: 60, cat: "streaming", icon: "fa-solid fa-p", color: "#0064FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo exclusivo", "Calidad HD", "Cero comerciales", "Múltiples perfiles"] }, // [cite: 3]
+  { name: "Paramount+", val: "1 MES", type: "PERFIL", price: 30, cat: "streaming", icon: "fa-solid fa-p", color: "#0064FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo exclusivo", "Calidad HD", "Cero comerciales", "Múltiples perfiles"] }, // [cite: 3]
+  { name: "Paramount+", val: "12 MESES", type: "PRIVADA", price: 400, cat: "streaming", icon: "fa-solid fa-p", color: "#0064FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo exclusivo", "Calidad HD", "Cero comerciales", "Múltiples perfiles"] }, // [cite: 3]
+  { name: "CHAT GPT PLUS", val: "1 MES", type: "PRIVADA", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10A37F", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en inteligencia artificial de última generación. Tendrás acceso total a modelos avanzados para resolver tareas. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["Acceso a GPT-4", "Respuestas rápidas", "Generación de imágenes", "Análisis avanzado"] }, // [cite: 3]
+  { name: "CHAT GPT GO", val: "12 MESES", type: "PRIVADA", price: 500, cat: "ia", icon: "fa-solid fa-robot", color: "#10A37F", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en inteligencia artificial de última generación. Tendrás acceso total a modelos avanzados para resolver tareas. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["Acceso continuo", "Respuestas rápidas", "Análisis avanzado", "Uso prolongado"] }, // [cite: 3]
+  { name: "DUOLINGO", val: "1 MES", type: "INVITACIÓN", price: 60, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: true, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Acelera tu aprendizaje con una experiencia inmersiva libre de interrupciones. Obtén acceso total a lecciones exclusivas y funciones premium. Una plataforma diseñada para el máximo rendimiento cognitivo.", benefits: ["Vidas ilimitadas", "Cero anuncios", "Lecciones offline", "Práctica VIP"] }, // [cite: 3]
+  { name: "DUOLINGO", val: "3 MESES", type: "INVITACIÓN", price: 120, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: true, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Acelera tu aprendizaje con una experiencia inmersiva libre de interrupciones. Obtén acceso total a lecciones exclusivas y funciones premium. Una plataforma diseñada para el máximo rendimiento cognitivo.", benefits: ["Vidas ilimitadas", "Cero anuncios", "Lecciones offline", "Práctica VIP"] }, // [cite: 3]
+  { name: "DUOLINGO", val: "6 MESES", type: "INVITACIÓN", price: 200, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: true, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Acelera tu aprendizaje con una experiencia inmersiva libre de interrupciones. Obtén acceso total a lecciones exclusivas y funciones premium. Una plataforma diseñada para el máximo rendimiento cognitivo.", benefits: ["Vidas ilimitadas", "Cero anuncios", "Lecciones offline", "Práctica VIP"] }, // [cite: 3]
+  { name: "APPLE TV con MLS", val: "1 MES", type: "PRIVADA", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#000000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI/NO COMPATIBLE IPHONE NI IPAD", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Originales de Apple", "Partidos de MLS", "Calidad 4K HDR", "Cero anuncios"] }, // [cite: 3]
+  { name: "APPLE TV con MLS", val: "3 MES", type: "PRIVADA", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#000000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI/NO COMPATIBLE IPHONE NI IPAD", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Originales de Apple", "Partidos de MLS", "Calidad 4K HDR", "Cero anuncios"] }, // [cite: 3]
+  { name: "APPLE TV con MLS", val: "3 MES", type: "PERFIL", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#000000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI/NO COMPATIBLE IPHONE NI IPAD", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Originales de Apple", "Partidos de MLS", "Calidad 4K HDR", "Cero anuncios"] }, // [cite: 3]
+  { name: "AUTODESK TODAS LAS APPS", val: "3 AÑOS", type: "PRIVADA", price: 900, cat: "diseno", icon: "fa-solid fa-compass", color: "#0696D7", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "5 MESES DE GARANTÍA", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Paquete completo", "Licencia prolongada", "Herramientas 3D", "Soporte activo"] }, // [cite: 3]
+  { name: "PURE VPN", val: "1 MES", type: "PRIVADA", price: 70, cat: "otros", icon: "fa-solid fa-shield-halved", color: "#4687FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Protege tu entorno digital con una experiencia inmersiva de alta seguridad y eficiencia. Garantizamos acceso total a características premium exclusivas. Estabilidad absoluta para el máximo rendimiento diario.", benefits: ["Conexión cifrada", "Servidores globales", "Velocidad extrema", "Privacidad total"] }, // [cite: 3]
+  { name: "NORD VPN", val: "1 MES", type: "PRIVADA", price: 70, cat: "otros", icon: "fa-solid fa-shield-halved", color: "#4687FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Protege tu entorno digital con una experiencia inmersiva de alta seguridad y eficiencia. Garantizamos acceso total a características premium exclusivas. Estabilidad absoluta para el máximo rendimiento diario.", benefits: ["Conexión cifrada", "Servidores globales", "Velocidad extrema", "Privacidad total"] }, // [cite: 3]
+  { name: "NORD VPN", val: "3 MESES", type: "PRIVADA", price: 150, cat: "otros", icon: "fa-solid fa-shield-halved", color: "#4687FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Protege tu entorno digital con una experiencia inmersiva de alta seguridad y eficiencia. Garantizamos acceso total a características premium exclusivas. Estabilidad absoluta para el máximo rendimiento diario.", benefits: ["Conexión cifrada", "Servidores globales", "Velocidad extrema", "Privacidad total"] }, // [cite: 3]
+  { name: "NORD VPN", val: "6 MESES", type: "PRIVADA", price: 300, cat: "otros", icon: "fa-solid fa-shield-halved", color: "#4687FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Protege tu entorno digital con una experiencia inmersiva de alta seguridad y eficiencia. Garantizamos acceso total a características premium exclusivas. Estabilidad absoluta para el máximo rendimiento diario.", benefits: ["Conexión cifrada", "Servidores globales", "Velocidad extrema", "Privacidad total"] }, // [cite: 3]
+  { name: "DEZZER", val: "1 MES", type: "PRIVADA", price: 65, cat: "streaming", icon: "fa-brands fa-deezer", color: "#FEAA2D", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Hi-Fi", "Cero publicidad", "Descargas offline", "Catálogo global"] }, // [cite: 3]
+  { name: "DEZZER", val: "2 MESES", type: "PRIVADA", price: 100, cat: "streaming", icon: "fa-brands fa-deezer", color: "#FEAA2D", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Hi-Fi", "Cero publicidad", "Descargas offline", "Catálogo global"] }, // [cite: 3]
+  { name: "DEZZER", val: "4 MESES", type: "PRIVADA", price: 170, cat: "streaming", icon: "fa-brands fa-deezer", color: "#FEAA2D", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Transforma tu entorno acústico con una experiencia inmersiva de alta fidelidad. Tu música sin límites y con acceso total a millones de canciones. Audio premium estructurado para el máximo rendimiento de tus sentidos.", benefits: ["Audio Hi-Fi", "Cero publicidad", "Descargas offline", "Catálogo global"] }, // [cite: 3]
+  { name: "Wondershare", val: "1 año", type: "PRIVADA", price: 500, cat: "diseno", icon: "fa-solid fa-clapperboard", color: "#00A8FF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Revoluciona tu identidad visual con una experiencia inmersiva de diseño avanzado. Disfruta de acceso total a herramientas profesionales y plantillas. Opciones calibradas para el máximo rendimiento creativo.", benefits: ["Suite completa", "Exportación HD", "Herramientas de autor", "Sin marcas de agua"] }, // [cite: 3]
+  { name: "Microsoft Office 365", val: "1 año", type: "PRIVADA", price: 200, cat: "otros", icon: "fa-brands fa-microsoft", color: "#D83B01", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Potencia tu productividad con una experiencia inmersiva en herramientas corporativas. Tendrás acceso total a la suite de ofimática más poderosa. Innovación pura para el máximo rendimiento de tu flujo.", benefits: ["Nube 1TB", "Suite completa", "Sincronización total", "Actualizaciones vivas"] }, // [cite: 3]
+  { name: "Minecraft JAVA+BEDROCK", val: "PERMANENTE", type: "PRIVADA", price: 350, cat: "otros", icon: "fa-solid fa-cube", color: "#5C9D34", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Protege tu entorno de juego con una experiencia inmersiva de alta estabilidad y eficiencia. Garantizamos acceso total a características premium exclusivas. Conexiones fluidas para el máximo rendimiento diario.", benefits: ["Licencia vitalicia", "Doble versión", "Acceso a servidores", "Actualizaciones libres"] }, // [cite: 3]
 
-    // SPOTIFY
-    { name: "Spotify Premium", val: "1 mes", type: "Nueva", price: 65, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "1 mes", type: "Cuenta Propia", price: 80, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "3 meses", type: "Nueva", price: 150, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "3 meses", type: "Cuenta Propia", price: 200, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "6 meses", type: "Nueva", price: 250, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "6 meses", type: "Cuenta Propia", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "1 año", type: "Nueva", price: 350, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Spotify Premium", val: "1 año", type: "Cuenta Propia", price: 500, cat: "streaming", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // NETFLIX
-    { name: "Netflix Premium", val: "1 mes", type: "Perfil", price: 80, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Netflix Premium", val: "1 mes", type: "Privada", price: 170, cat: "streaming", icon: "fa-solid fa-n", color: "#E50914", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // DISNEY
-    { name: "Disney+", val: "1 mes", type: "Privada", price: 75, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Disney+", val: "1 mes", type: "Perfil", price: 45, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Disney+ (3 ESPN)", val: "1 mes", type: "Perfil", price: 50, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Disney+ (7 ESPN)", val: "1 mes", type: "Perfil", price: 55, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Disney+", val: "1 año", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-play", color: "#006E99", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // GEMINI
-    { name: "Gemini", val: "1 año", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Gemini", val: "3 meses", type: "Privada", price: 200, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Gemini", val: "1 mes", type: "Privada", price: 75, cat: "ia", icon: "fa-solid fa-brain", color: "#8E75FF", renewable: true, delivery: "Invitación", warranty: "Si" },
-
-    // CAPCUT
-    { name: "CapCut Premium", val: "1 mes", type: "Privada", price: 90, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 400, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "CapCut Premium", val: "Lifetime", type: "Privada", price: 300, cat: "diseno", icon: "fa-solid fa-video", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // VIX
-    { name: "Vix Premium", val: "1 mes", type: "Privada", price: 45, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Vix Premium", val: "1 mes", type: "Perfil", price: 25, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Vix Premium", val: "2 meses", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Vix Premium", val: "1 año", type: "Privada", price: 200, cat: "streaming", icon: "fa-solid fa-tv", color: "#FF4500", renewable: false, delivery: "Correo/Contraseña", warranty: "5 Meses" },
-
-    // CRUNCHYROLL
-    { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Perfil", price: 35, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Crunchyroll Mega Fan", val: "1 mes", type: "Privada", price: 80, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Compartida", price: 380, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Crunchyroll Fan", val: "12 meses", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Crunchyroll Mega Fan", val: "12 meses", type: "Privada", price: 600, cat: "streaming", icon: "fa-solid fa-ghost", color: "#F47521", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // HBO MAX
-    { name: "HBO Max Estándar", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "HBO Max Estándar", val: "1 mes", type: "Privada", price: 50, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "HBO Max", val: "12 meses", type: "Privada", price: 350, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
-    { name: "HBO Max Full Access", val: "12 meses", type: "Privada", price: 450, cat: "streaming", icon: "fa-solid fa-clapperboard", color: "#0047FF", renewable: false, delivery: "Correo/Contraseña", warranty: "De por vida" },
-
-    // CANVA
-    { name: "Canva Pro", val: "1 mes", type: "Cuenta Propia", price: 60, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
-    { name: "Canva Pro", val: "3 meses", type: "Cuenta Propia", price: 130, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
-    { name: "Canva Pro", val: "6 meses", type: "Cuenta Propia", price: 190, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
-    { name: "Canva Pro", val: "12 meses", type: "Cuenta Propia", price: 400, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Invitación", warranty: "Si" },
-    { name: "Canva Pro", val: "12 meses", type: "Privada", price: 340, cat: "diseno", icon: "fa-solid fa-palette", color: "#00C4CC", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // PARAMOUNT+
-    { name: "Paramount+", val: "1 mes", type: "Privada", price: 60, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Paramount+", val: "1 mes", type: "Perfil", price: 30, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Paramount+", val: "12 meses", type: "Privada", price: 400, cat: "streaming", icon: "fa-solid fa-mountain-sun", color: "#0064FF", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // CHATGPT
-    { name: "ChatGPT Plus", val: "1 mes", type: "Privada", price: 80, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: true, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "ChatGPT Go", val: "12 meses", type: "Privada", price: 500, cat: "ia", icon: "fa-solid fa-robot", color: "#10a37f", renewable: false, delivery: "Clave Activación", warranty: "Si" },
-
-    // DUOLINGO
-    { name: "Duolingo Plus", val: "1 mes", type: "Privada", price: 60, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-    { name: "Duolingo Plus", val: "3 meses", type: "Privada", price: 300, cat: "otros", icon: "fa-solid fa-language", color: "#58CC02", renewable: false, delivery: "Correo/Contraseña", warranty: "Si" },
-
-    // APPLE TV
-    { name: "Apple TV con MLS", val: "1 mes", type: "Privada", price: 70, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: true, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
-    { name: "Apple TV con MLS", val: "3 meses", type: "Privada", price: 150, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
-    { name: "Apple TV con MLS", val: "3 meses", type: "Perfil", price: 80, cat: "streaming", icon: "fa-brands fa-apple", color: "#ffffff", renewable: false, delivery: "Correo/Contraseña", warranty: "Compatibilidad" },
-
-    // AUTODESK
-    { name: "Autodesk All Apps", val: "3 años", type: "Privada", price: 900, cat: "diseno", icon: "fa-solid fa-cube", color: "#0696d7", renewable: false, delivery: "Correo/Contraseña", warranty: "Meses Garantía", isNew: true },
-
-    // VPN
-    { name: "Pure VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#FF0000", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-    { name: "Nord VPN", val: "1 mes", type: "Privada", price: 100, cat: "otros", icon: "fa-solid fa-shield", color: "#0052cc", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-
-    // DEEZER
-    { name: "Deezer Premium", val: "1 mes", type: "Privada", price: 65, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-    { name: "Deezer Premium", val: "2 meses", type: "Privada", price: 100, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-    { name: "Deezer Premium", val: "4 meses", type: "Privada", price: 170, cat: "streaming", icon: "fa-brands fa-deezer", color: "#EF5466", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true },
-
-    // WONDERSHARE
-    { name: "Wondershare", val: "1 año", type: "Privada", price: 500, cat: "diseno", icon: "fa-solid fa-wand-magic-sparkles", color: "#00A3E0", renewable: true, delivery: "Correo/Contraseña", warranty: "Si", isNew: true }
+  // CATEGORÍA: STREAMING (Página 3)
+  { name: "UNIVERSAL", val: "1 MES", type: "PERFIL", price: 50, cat: "streaming", icon: "fa-solid fa-ticket", color: "#FF0000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo exclusivo", "Calidad HD", "Cero anuncios", "Perfiles estables"] }, // [cite: 4]
+  { name: "UNIVERSAL", val: "1 MES", type: "PRIVADA", price: 90, cat: "streaming", icon: "fa-solid fa-ticket", color: "#FF0000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Catálogo exclusivo", "Calidad HD", "Cero anuncios", "Perfiles estables"] }, // [cite: 4]
+  { name: "MUBI", val: "1 MES", type: "PERFIL", price: 40, cat: "streaming", icon: "fa-solid fa-ticket", color: "#FF0000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cine de autor", "Selección curada", "Calidad HD", "Cero anuncios"] }, // [cite: 4]
+  { name: "MUBI", val: "1 MES", type: "PRIVADA", price: 70, cat: "streaming", icon: "fa-solid fa-ticket", color: "#FF0000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Cine de autor", "Selección curada", "Calidad HD", "Cero anuncios"] }, // [cite: 4]
+  { name: "VIKU RAKUTEN", val: "1 MES", type: "PRIVADA", price: 65, cat: "streaming", icon: "fa-solid fa-ticket", color: "#FF0000", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Eleva tu entretenimiento con una experiencia inmersiva completamente libre de interrupciones. Disfruta de acceso total a tus series y películas favoritas. La plataforma definitiva diseñada para el máximo rendimiento audiovisual.", benefits: ["Dramas asiáticos", "Estrenos exclusivos", "Calidad HD", "Cero anuncios"] } // [cite: 4]
 ];
 
-        function toggleReferences() {
-            const refSection = document.getElementById('referencesSection');
-            const hero = document.getElementById('heroSection');
-            const grid = document.getElementById('productGrid');
-            const title = document.getElementById('mainTitle');
+        // --- MODAL LOGIC ---
+        function openModal(index) {
+            const product = products[index];
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalBody = document.getElementById('modalBody');
 
-            if (refSection.classList.contains('hidden')) {
-                refSection.classList.remove('hidden');
-                hero.classList.add('hidden');
-                grid.classList.add('hidden');
-                title.innerHTML = 'NEXUS <span class="gradient-text uppercase">Referencias</span>';
-                document.getElementById('refBtn').classList.add('active');
-            } else {
-                refSection.classList.add('hidden');
-                hero.classList.remove('hidden');
-                grid.classList.remove('hidden');
-                title.innerHTML = 'NEXUS <span class="gradient-text">CATÁLOGO</span>';
-                document.getElementById('refBtn').classList.remove('active');
-            }
+            modalBody.innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl" style="background: ${product.color}20; color: ${product.color}">
+                        <i class="${product.icon}"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-orbitron font-bold text-white">${product.name}</h2>
+                        <span class="text-xs text-blue-400 font-bold uppercase tracking-widest">${product.val} - ${product.type}</span>
+                    </div>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    ${product.desc}
+                </p>
+
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                    ${product.benefits.map(b => `
+                        <div class="flex items-center gap-2 text-[11px] text-gray-300">
+                            <i class="fas fa-check-circle text-blue-500"></i>
+                            <span>${b}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                    <div>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold block mb-1">Precio Final</span>
+                        <span class="text-2xl font-orbitron font-bold text-white">$${product.price}</span>
+                    </div>
+                    <button onclick="redirectToWhatsApp('${product.name}', '$${product.price}')" class="btn-buy px-6 py-3 rounded-xl text-white font-bold text-sm flex items-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Adquirir Ahora
+                    </button>
+                </div>
+            `;
+
+            modalOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                modalOverlay.classList.remove('opacity-0');
+                modalOverlay.classList.add('modal-active');
+            }, 10);
         }
 
-        function filterItems(category, btn) {
-            document.getElementById('referencesSection').classList.add('hidden');
-            document.getElementById('heroSection').classList.remove('hidden');
-            document.getElementById('productGrid').classList.remove('hidden');
-            document.getElementById('mainTitle').innerHTML = 'NEXUS <span class="gradient-text">CATÁLOGO</span>';
-
-            document.querySelectorAll('.category-pill').forEach(b => {
-                b.classList.remove('active');
-                b.classList.add('bg-white/5');
-            });
-            btn.classList.add('active');
-            btn.classList.remove('bg-white/5');
-            renderProducts(category);
+        function closeModal() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.add('opacity-0');
+            modalOverlay.classList.remove('modal-active');
+            setTimeout(() => {
+                modalOverlay.classList.add('hidden');
+            }, 300);
         }
 
-        function redirectToWhatsApp(productName, price) {
-            // USAR NÚMERO ALEATORIO PARA COMPRAS
-            const num = getRandomNumber();
-            const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por ${price}. ¿Qué sigue?`;
-            window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
-        }
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('modalOverlay').addEventListener('click', closeModal);
 
-        function contactSupport() {
-            // USAR NÚMERO ALEATORIO PARA SOPORTE
-            const num = getRandomNumber();
-            window.open(`https://wa.me/${num}?text=Soporte+Nexus`, '_blank');
-        }
-
+        // --- RENDER LOGIC ---
         function renderProducts(category = 'all') {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
@@ -414,13 +466,14 @@
                 const card = document.createElement('div');
                 card.className = 'glass-card relative rounded-2xl p-5 flex flex-col h-full animate-fade-in';
                 card.style.animationDelay = `${i * 0.03}s`;
+                card.onclick = () => openModal(products.indexOf(p));
                 
                 const renewableTag = p.renewable 
                     ? '<span class="text-[8px] text-green-400 font-bold border border-green-400/30 px-1.5 py-0.5 rounded bg-green-400/5">RENOVABLE</span>'
-                    : '<span class="text-[8px] text-gray-500 font-bold border border-white/5 px-1.5 py-0.5 rounded">CUENTA NUEVA</span>';
+                    : '<span class="text-[8px] text-gray-500 font-bold border border-white/5 px-1.5 py-0.5 rounded">NUEVA</span>';
 
                 const newBadge = p.isNew 
-                    ? '<div class="absolute -top-3 -right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.5)] animate-pulse z-10 border border-white/20">¡NUEVO! 🔥</div>' 
+                    ? '<div class="absolute -top-3 -right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.5)] animate-pulse z-10 border border-white/20">NEW</div>' 
                     : '';
 
                 card.innerHTML = `
@@ -430,7 +483,7 @@
                             <i class="${p.icon}"></i>
                         </div>
                         <div class="text-right">
-                            <span class="text-[9px] font-bold px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5 uppercase italic tracking-tighter">
+                            <span class="text-[9px] font-bold px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/5 uppercase italic">
                                 ${p.type}
                             </span>
                             <div class="mt-1">${renewableTag}</div>
@@ -443,10 +496,6 @@
                             <i class="far fa-clock text-blue-500"></i>
                             <span>${p.val} de validez</span>
                         </div>
-                        <div class="flex items-center gap-2 text-[11px]">
-                            <i class="fas fa-truck text-blue-400"></i>
-                            <span class="text-gray-400">${p.delivery}</span>
-                        </div>
                         <div class="flex items-center gap-2 text-[10px]">
                             <i class="fas fa-shield-alt text-green-500"></i>
                             <span class="text-gray-400 uppercase font-bold">Garantía: <span class="text-white">${p.warranty}</span></span>
@@ -455,10 +504,10 @@
 
                     <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
                         <div>
-                            <p class="text-[9px] text-gray-500 uppercase font-bold tracking-tighter mb-1">Inversión</p>
+                            <p class="text-[9px] text-gray-500 uppercase font-bold tracking-tighter mb-1">Precio</p>
                             <p class="text-xl font-orbitron font-bold text-white tracking-tighter">$${p.price}</p>
                         </div>
-                        <button onclick="redirectToWhatsApp('${p.name}', '$${p.price}')" class="btn-buy p-2.5 rounded-xl text-white">
+                        <button onclick="event.stopPropagation(); redirectToWhatsApp('${p.name}', '$${p.price}')" class="btn-buy p-2.5 rounded-xl text-white">
                             <i class="fab fa-whatsapp text-lg"></i>
                         </button>
                     </div>
@@ -467,7 +516,68 @@
             });
         }
 
-        window.onload = () => renderProducts();
+        // --- HELPER FUNCTIONS ---
+        function filterItems(category, btn) {
+            document.getElementById('referencesSection').classList.add('hidden');
+            document.getElementById('heroSection').classList.remove('hidden');
+            document.getElementById('productGrid').classList.remove('hidden');
+            document.querySelectorAll('.category-pill').forEach(b => {
+                b.classList.remove('active');
+                b.classList.add('bg-white/5');
+            });
+            btn.classList.add('active');
+            btn.classList.remove('bg-white/5');
+            renderProducts(category);
+        }
+
+        function toggleReferences() {
+            const refSection = document.getElementById('referencesSection');
+            const hero = document.getElementById('heroSection');
+            const grid = document.getElementById('productGrid');
+            if (refSection.classList.contains('hidden')) {
+                refSection.classList.remove('hidden');
+                hero.classList.add('hidden');
+                grid.classList.add('hidden');
+                document.getElementById('refBtn').classList.add('active');
+            } else {
+                refSection.classList.add('hidden');
+                hero.classList.remove('hidden');
+                grid.classList.remove('hidden');
+                document.getElementById('refBtn').classList.remove('active');
+            }
+        }
+
+        function redirectToWhatsApp(productName, price) {
+            const num = getRandomNumber();
+            const text = `¡Hola NexusPreds! 👋 Quiero comprar: ${productName} por ${price}. ¿Qué sigue?`;
+            window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function contactSupport() {
+            const num = getRandomNumber();
+            window.open(`https://wa.me/${num}?text=Soporte+Nexus`, '_blank');
+        }
+
+        function createParticles() {
+            const host = document.getElementById('particles-host');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 3 + 1;
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.top = `${Math.random() * 100}%`;
+                p.style.animationDelay = `${Math.random() * 10}s`;
+                p.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                host.appendChild(p);
+            }
+        }
+
+        window.onload = () => {
+            renderProducts();
+            createParticles();
+        };
     </script>
 </body>
 </html>
