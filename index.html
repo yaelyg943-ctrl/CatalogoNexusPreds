@@ -412,74 +412,119 @@
             ACCESO <br><span class="gradient-text block mt-2">PREMIUM</span>
         </h2>
         <p class="text-gray-400 font-space text-sm md:text-base max-w-xl text-center mb-12">
-            Elige el catálogo que deseas explorar. Cuentas de streaming y herramientas de Inteligencia Artificial a tu alcance con garantía.
+            Elige el catálogo que deseas explorar. Cuentas premium, herramientas creativas o los mejores títulos de videojuegos a tu alcance.
         </p>
 
         <!-- SECCIÓN DE ANUNCIOS / PROMOCIONES -->
-        <div class="w-full max-w-5xl mx-auto mb-16">
-            <h3 class="text-2xl font-orbitron font-bold mb-6 flex items-center gap-3">
-                <i class="fas fa-bolt text-yellow-400"></i> Novedades y Ofertas
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- PROMOCIÓN 1: GEMINI VS CHATGPT -->
-                <div onclick="orderPromotion('Gemini IA + 5TB (en tu correo personal)', '60 (1M), 150 (3M) o 250 (6M)')" class="glass-card overflow-hidden rounded-[2rem] group cursor-pointer relative border-blue-500/30 hover:border-blue-400">
-                    <img src="image_301d41.jpg" alt="Gemini AI" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-5 w-full">
-                        <span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-500/30 mb-2 inline-block">INTELIGENCIA ARTIFICIAL</span>
-                        <h4 class="text-lg md:text-xl font-bold font-orbitron text-white leading-tight mb-1">Gemini Avanzado + 5TB</h4>
-                        <p class="text-xs text-gray-300 font-space mb-2">Activación directo en tu correo. Integración a Gmail, búsqueda real y <strong>5 Teras en la Nube de Google</strong> incluidos.</p>
-                        <div class="flex justify-between items-end mt-1">
-                            <p class="text-sm text-gray-300 font-space">Desde <span class="text-blue-400 font-bold">$60</span></p>
-                            <span class="text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm font-bold"><i class="fab fa-whatsapp mr-1 text-lg"></i> Pedir</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="w-full mb-16 relative px-4 md:px-0">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">Promociones <span class="gradient-text">Destacadas</span></h3>
+                <p class="text-gray-400 font-space text-sm">Desliza para descubrir nuestras mejores ofertas</p>
+            </div>
 
-                <!-- PROMOCIÓN 2: PRIME VIDEO -->
-                <div onclick="orderPromotion('Prime Video (1 o 6 Meses)', '50 o 260')" class="glass-card overflow-hidden rounded-[2rem] group cursor-pointer relative border-cyan-500/30 hover:border-cyan-400">
-                    <img src="https://images.unsplash.com/photo-1593789182376-77884d5f47fb?q=80&w=600&auto=format&fit=crop" alt="Prime Video" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-5 w-full">
-                        <span class="bg-cyan-500/20 text-cyan-400 text-[10px] font-bold px-3 py-1 rounded-full border border-cyan-500/30 mb-2 inline-block">CINE Y SERIES</span>
-                        <h4 class="text-lg md:text-xl font-bold font-orbitron text-white leading-tight mb-1">Prime Video Premium</h4>
-                        <p class="text-xs text-gray-300 font-space mb-2">Disfruta el catálogo libre de anuncios. Disponible en planes convenientes y accesibles.</p>
-                        <div class="flex justify-between items-end mt-1">
-                            <p class="text-sm text-gray-300 font-space">1M <span class="text-cyan-400 font-bold">$50</span> | 6M <span class="text-cyan-400 font-bold">$260</span></p>
-                            <span class="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm font-bold"><i class="fab fa-whatsapp mr-1 text-lg"></i> Pedir</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="relative w-full max-w-[1200px] mx-auto group">
+                <!-- Botones de Navegación del Carrusel -->
+                <button onclick="scrollPromo(-1)" class="absolute left-2 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/90 border border-white/20 text-white flex items-center justify-center backdrop-blur-md hover:bg-blue-500 hover:scale-110 transition-all opacity-100 shadow-[0_0_20px_rgba(0,102,255,0.6)]">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button onclick="scrollPromo(1)" class="absolute right-2 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/90 border border-white/20 text-white flex items-center justify-center backdrop-blur-md hover:bg-blue-500 hover:scale-110 transition-all opacity-100 shadow-[0_0_20px_rgba(0,102,255,0.6)]">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
 
-                <!-- PROMOCIÓN 3: NETFLIX PERFIL -->
-                <div onclick="orderPromotion('Netflix 1 Mes (Perfil)', '80')" class="glass-card overflow-hidden rounded-[2rem] group cursor-pointer relative border-red-500/30 hover:border-red-400">
-                    <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600&auto=format&fit=crop" alt="Netflix" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-5 w-full">
-                        <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-3 py-1 rounded-full border border-red-500/30 mb-2 inline-block">MÁS VENDIDO</span>
-                        <h4 class="text-lg md:text-xl font-bold font-orbitron text-white leading-tight mb-1">Netflix (Perfil)</h4>
-                        <p class="text-xs text-gray-300 font-space mb-2">Acceso a un perfil exclusivo para ti por 1 mes. Calidad máxima y catálogo global.</p>
-                        <div class="flex justify-between items-end mt-1">
-                            <p class="text-sm text-gray-300 font-space">Llévatelo por <span class="text-red-400 font-bold">$80</span></p>
-                            <span class="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm font-bold"><i class="fab fa-whatsapp mr-1 text-lg"></i> Pedir</span>
+                <!-- Contenedor del Carrusel -->
+                <div id="promoCarousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 px-[5vw] md:px-[calc(50%-450px)] no-scrollbar scroll-smooth py-4 items-stretch">
+                    
+                    <!-- PROMOCIÓN GEMINI -->
+                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,102,255,0.15)] bg-[#0a0f1a]">
+                        <!-- Text Side -->
+                        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
+                            <span class="text-blue-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">INTELIGENCIA ARTIFICIAL</span>
+                            <h4 class="text-3xl md:text-5xl font-orbitron font-black text-white leading-tight mb-4 drop-shadow-lg">Gemini Avanzado <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">+ 5TB Nube</span></h4>
+                            <p class="text-gray-300 font-space text-sm md:text-base mb-8 max-w-sm drop-shadow-md">Mejor que ChatGPT. La inteligencia de Google en tu correo personal. Escribe mejor, busca datos reales e incluye 5 Teras de almacenamiento.</p>
+                            
+                            <button onclick="orderPromotion('Gemini IA + 5TB (en tu correo personal)', '60 (1M), 150 (3M) o 250 (6M)')" class="bg-white text-black font-bold py-3 px-6 rounded-full hover:bg-gray-200 hover:scale-105 transition-all w-max flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                                Desde $60 <i class="fab fa-whatsapp text-green-600 text-lg"></i>
+                            </button>
+                        </div>
+                        <!-- Image Side -->
+                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
+                            <img src="image_301d41.jpg" alt="Gemini AI" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover md:object-contain object-center transition-transform duration-700 hover:scale-105">
                         </div>
                     </div>
-                </div>
 
-                <!-- PROMOCIÓN 4: CANVA INVITACIÓN -->
-                <div onclick="orderPromotion('Canva PRO 1 Año (Invitación)', '200')" class="glass-card overflow-hidden rounded-[2rem] group cursor-pointer relative border-purple-500/30 hover:border-purple-400">
-                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=600&auto=format&fit=crop" alt="Canva" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-5 w-full">
-                        <span class="bg-purple-500/20 text-purple-400 text-[10px] font-bold px-3 py-1 rounded-full border border-purple-500/30 mb-2 inline-block">OFERTA ANUAL</span>
-                        <h4 class="text-lg md:text-xl font-bold font-orbitron text-white leading-tight mb-1">Canva PRO (1 Año)</h4>
-                        <p class="text-xs text-gray-300 font-space mb-2">Método por invitación directo a tu cuenta original. Desbloquea todas las plantillas y elementos premium.</p>
-                        <div class="flex justify-between items-end mt-1">
-                            <p class="text-sm text-gray-300 font-space">Súper precio <span class="text-purple-400 font-bold">$200</span></p>
-                            <span class="text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-sm font-bold"><i class="fab fa-whatsapp mr-1 text-lg"></i> Pedir</span>
+                    <!-- PROMOCIÓN PRIME VIDEO -->
+                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(6,182,212,0.15)] bg-[#0a0f1a]">
+                        <!-- Text Side -->
+                        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
+                            <span class="text-cyan-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">CINE Y SERIES</span>
+                            <h4 class="text-3xl md:text-5xl font-orbitron font-black text-white leading-tight mb-4 drop-shadow-lg">Prime Video <br><span class="text-cyan-400">Premium</span></h4>
+                            <p class="text-gray-300 font-space text-sm md:text-base mb-8 max-w-sm drop-shadow-md">Disfruta el catálogo libre de anuncios. Películas y series exclusivas en máxima calidad garantizada.</p>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="orderPromotion('Prime Video (1 Mes)', '50')" class="bg-white text-black font-bold py-3 px-6 rounded-full hover:bg-gray-200 hover:scale-105 transition-all w-max flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                                    1 Mes $50
+                                </button>
+                                <button onclick="orderPromotion('Prime Video (6 Meses)', '260')" class="bg-transparent border border-white text-white font-bold py-3 px-6 rounded-full hover:bg-white/10 hover:scale-105 transition-all w-max flex items-center gap-2 text-sm">
+                                    6 Meses $260
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Image Side -->
+                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
+                            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80" alt="Prime Video" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
                         </div>
                     </div>
+
+                    <!-- PROMOCIÓN NETFLIX -->
+                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(239,68,68,0.15)] bg-[#0a0f1a]">
+                        <!-- Text Side -->
+                        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
+                            <span class="text-red-500 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">MÁS VENDIDO</span>
+                            <h4 class="text-3xl md:text-5xl font-orbitron font-black text-white leading-tight mb-4 drop-shadow-lg">Netflix <br><span class="text-red-500">Exclusivo</span></h4>
+                            <p class="text-gray-300 font-space text-sm md:text-base mb-8 max-w-sm drop-shadow-md">Acceso a un perfil asignado solo para ti por 1 mes. Calidad máxima y el mejor catálogo global.</p>
+                            
+                            <button onclick="orderPromotion('Netflix 1 Mes (Perfil)', '80')" class="bg-white text-black font-bold py-3 px-6 rounded-full hover:bg-gray-200 hover:scale-105 transition-all w-max flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                                Pedir por $80 <i class="fab fa-whatsapp text-green-600 text-lg"></i>
+                            </button>
+                        </div>
+                        <!-- Image Side -->
+                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
+                            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=800&q=80" alt="Netflix" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
+                        </div>
+                    </div>
+
+                    <!-- PROMOCIÓN CANVA -->
+                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(168,85,247,0.15)] bg-[#0a0f1a]">
+                        <!-- Text Side -->
+                        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
+                            <span class="text-purple-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">OFERTA ANUAL</span>
+                            <h4 class="text-3xl md:text-5xl font-orbitron font-black text-white leading-tight mb-4 drop-shadow-lg">Canva PRO <br><span class="text-purple-400">Todo 1 Año</span></h4>
+                            <p class="text-gray-300 font-space text-sm md:text-base mb-8 max-w-sm drop-shadow-md">Desbloquea plantillas y herramientas premium. Método por invitación directo a tu cuenta original.</p>
+                            
+                            <button onclick="orderPromotion('Canva PRO 1 Año (Invitación)', '200')" class="bg-white text-black font-bold py-3 px-6 rounded-full hover:bg-gray-200 hover:scale-105 transition-all w-max flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                                Pedir por $200 <i class="fab fa-whatsapp text-green-600 text-lg"></i>
+                            </button>
+                        </div>
+                        <!-- Image Side -->
+                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Canva" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+
+            <!-- Puntos de Navegación -->
+            <div class="flex justify-center gap-2 mt-6" id="carouselDots">
+                <!-- Se inyectan con JS -->
             </div>
         </div>
 
@@ -1157,7 +1202,65 @@
         window.onload = () => {
             createParticles();
             showHome();
+            initCarousel(); // Iniciar carrusel
         };
+
+        // --- LÓGICA DEL CARRUSEL ---
+        function initCarousel() {
+            const carousel = document.getElementById('promoCarousel');
+            const dotsContainer = document.getElementById('carouselDots');
+            if(!carousel || !dotsContainer) return;
+            
+            const items = carousel.querySelectorAll('.snap-center');
+            const dots = [];
+            
+            dotsContainer.innerHTML = '';
+            items.forEach((_, i) => {
+                const dot = document.createElement('button');
+                // Estilo inactivo por defecto
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 bg-white/30 hover:bg-white/50 cursor-pointer`;
+                dot.onclick = () => {
+                    items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                };
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            });
+
+            // Observador para saber qué tarjeta está activa (centrada)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(items).indexOf(entry.target);
+                        dots.forEach((dot, i) => {
+                            if (i === index) {
+                                // Activo
+                                dot.classList.remove('bg-white/30', 'w-2', 'hover:bg-white/50');
+                                dot.classList.add('bg-white', 'w-6');
+                            } else {
+                                // Inactivo
+                                dot.classList.remove('bg-white', 'w-6');
+                                dot.classList.add('bg-white/30', 'w-2', 'hover:bg-white/50');
+                            }
+                        });
+                    }
+                });
+            }, {
+                root: carousel,
+                threshold: 0.6 // Se activa cuando al menos el 60% de la tarjeta es visible
+            });
+
+            items.forEach(item => observer.observe(item));
+        }
+
+        function scrollPromo(direction) {
+            const carousel = document.getElementById('promoCarousel');
+            const item = carousel.querySelector('.snap-center');
+            const itemWidth = item.offsetWidth;
+            const gap = parseInt(window.getComputedStyle(carousel).gap) || 0;
+            const scrollAmount = itemWidth + gap;
+            
+            carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
