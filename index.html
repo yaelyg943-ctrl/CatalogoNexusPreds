@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusPreds - Catálogo Oficial Completo</title>
+    <title>NexusPreds | Streaming, IA y herramientas premium</title>
+    <meta name="description" content="Compra accesos premium de streaming, inteligencia artificial y herramientas digitales. Elige tu producto y pide por WhatsApp de forma rápida y sencilla.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -334,6 +335,327 @@
             pointer-events: none;
             z-index: 1;
         }
+
+
+        /* =====================================================
+           REDISEÑO MINIMALISTA / UX 2026
+           Conserva la identidad visual, imágenes y funcionalidades
+           pero reduce ruido y mejora la jerarquía de información.
+        ====================================================== */
+        :root {
+            --surface: #08101d;
+            --surface-2: #0c1524;
+            --surface-soft: rgba(255,255,255,.045);
+            --line: rgba(255,255,255,.09);
+            --muted: #9ca9ba;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { line-height: 1.5; }
+
+        /* Fondo más tranquilo */
+        .bg-grid { opacity: .35; animation-duration: 120s; }
+        .particle { opacity: .08 !important; filter: blur(1px); }
+        .glow-sphere { opacity: .26; filter: blur(110px); }
+        body::before { opacity: .35; }
+
+        /* Header simple y legible */
+        .nav-blur {
+            background: rgba(3, 5, 8, .86);
+            border-bottom: 1px solid var(--line) !important;
+            box-shadow: none;
+        }
+
+        /* Tarjetas sin exceso de glow/movimiento */
+        .glass-card {
+            background: rgba(8, 16, 29, .82);
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 30px rgba(0,0,0,.18);
+            transition: border-color .2s ease, background .2s ease, transform .2s ease;
+        }
+        .glass-card:hover,
+        .glass-card.all-card:hover {
+            transform: translateY(-3px);
+            background: rgba(10, 20, 35, .96);
+            border-color: rgba(59,130,246,.42);
+            box-shadow: 0 14px 36px rgba(0,0,0,.24);
+        }
+        .glass-card:hover .card-icon { transform: none; filter: none; }
+
+        .btn-buy {
+            background: #1677ff;
+            box-shadow: none;
+            border: 1px solid rgba(255,255,255,.12);
+            transition: transform .18s ease, background .18s ease;
+        }
+        .btn-buy:hover {
+            transform: translateY(-1px);
+            box-shadow: none;
+            filter: none;
+            background: #2a84ff;
+        }
+        .btn-buy::before { display: none; }
+
+        .category-pill {
+            background: rgba(255,255,255,.035);
+            border-color: var(--line);
+            transition: background .18s ease, border-color .18s ease, color .18s ease;
+        }
+        .category-pill::before { display: none; }
+        .category-pill:hover { border-color: rgba(96,165,250,.45); background: rgba(59,130,246,.08); }
+        .category-pill.active,
+        .category-pill.active-all {
+            transform: none;
+            box-shadow: none;
+            background: #1677ff;
+            border-color: #1677ff;
+        }
+
+        .hero-badge { box-shadow: none; }
+        .hero-badge:hover { transform: none; box-shadow: none; }
+        .new-badge { animation: none; box-shadow: none; }
+
+        /* Home */
+        .home-shell { width: 100%; max-width: 1180px; margin: 0 auto; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: .55rem;
+            color: #8fc0ff; background: rgba(22,119,255,.09);
+            border: 1px solid rgba(96,165,250,.2);
+            padding: .48rem .78rem; border-radius: 999px;
+            font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+        }
+        .hero-clean { padding: 3.2rem 0 2.2rem; text-align: center; }
+        .hero-clean h2 { max-width: 880px; margin: 1.15rem auto .9rem; letter-spacing: -.045em; }
+        .hero-clean .lead { max-width: 720px; margin: 0 auto; color: #a9b5c5; font-size: 1rem; }
+        .hero-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-top:1.55rem; }
+        .primary-cta, .secondary-cta {
+            min-height: 48px; padding: .85rem 1.2rem; border-radius: .9rem;
+            display: inline-flex; align-items:center; justify-content:center; gap:.65rem;
+            font-weight: 700; font-size: .92rem; transition: .18s ease;
+        }
+        .primary-cta { background:#1677ff; color:#fff; border:1px solid #1677ff; }
+        .primary-cta:hover { background:#2a84ff; transform:translateY(-1px); }
+        .secondary-cta { color:#e5edf7; background:rgba(255,255,255,.045); border:1px solid var(--line); }
+        .secondary-cta:hover { background:rgba(255,255,255,.075); border-color:rgba(255,255,255,.16); }
+
+        .trust-row {
+            margin: 1.45rem auto 0; max-width: 820px; display:flex; flex-wrap:wrap;
+            justify-content:center; gap:.55rem;
+        }
+        .trust-chip {
+            display:inline-flex; align-items:center; gap:.42rem; color:#b9c5d3;
+            padding:.48rem .72rem; background:rgba(255,255,255,.03);
+            border:1px solid rgba(255,255,255,.07); border-radius:999px; font-size:.78rem;
+        }
+        .trust-chip i { color:#60a5fa; }
+
+        .section-clean { margin-top: 3.6rem; }
+        .section-heading { text-align:center; margin-bottom:1.5rem; }
+        .section-heading h3 { font-size: clamp(1.65rem, 4vw, 2.35rem); letter-spacing:-.03em; }
+        .section-heading p { color:#8f9cad; margin-top:.45rem; font-size:.9rem; }
+
+        .steps-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.85rem; }
+        .step-card {
+            background:rgba(255,255,255,.025); border:1px solid var(--line); border-radius:1.15rem;
+            padding:1.35rem; text-align:left;
+        }
+        .step-number {
+            width:2.2rem; height:2.2rem; display:flex; align-items:center; justify-content:center;
+            background:rgba(22,119,255,.12); color:#7eb6ff; border:1px solid rgba(96,165,250,.18);
+            border-radius:.75rem; font-weight:800; margin-bottom:.85rem;
+        }
+        .step-card h4 { font-size:1rem; font-weight:700; color:white; margin-bottom:.35rem; }
+        .step-card p { font-size:.82rem; color:#8f9cad; line-height:1.6; }
+
+        .choice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.85rem; }
+        .choice-card {
+            cursor:pointer; background:rgba(255,255,255,.025); border:1px solid var(--line);
+            border-radius:1.2rem; padding:1.25rem; text-align:left; transition:.18s ease;
+        }
+        .choice-card:hover { transform:translateY(-2px); background:rgba(255,255,255,.045); border-color:rgba(96,165,250,.34); }
+        .choice-icon {
+            width:2.65rem; height:2.65rem; border-radius:.85rem; display:flex; align-items:center; justify-content:center;
+            background:rgba(22,119,255,.1); color:#75adff; border:1px solid rgba(96,165,250,.16); margin-bottom:.85rem;
+        }
+        .choice-card h4 { font-size:1rem; font-weight:800; color:white; }
+        .choice-card p { color:#8f9cad; font-size:.79rem; margin-top:.35rem; line-height:1.55; }
+        .choice-link { color:#7eb6ff; font-size:.78rem; font-weight:700; margin-top:.8rem; display:inline-flex; align-items:center; gap:.35rem; }
+
+        /* Imagen intuitiva para la sección de búsqueda */
+        .search-showcase {
+            display:grid; grid-template-columns:1.08fr .92fr; gap:1rem; align-items:stretch;
+            margin-bottom:1rem;
+        }
+        .search-copy-panel, .search-image-panel {
+            background:rgba(255,255,255,.025); border:1px solid var(--line);
+            border-radius:1.25rem; padding:1.2rem;
+        }
+        .search-copy-panel {
+            display:flex; flex-direction:column; justify-content:center;
+            background:linear-gradient(180deg, rgba(16,23,38,.92), rgba(10,15,26,.95));
+        }
+        .search-copy-panel h4 { font-size:1.5rem; line-height:1.15; font-weight:800; color:#fff; margin:.6rem 0; }
+        .search-copy-panel p { color:#96a4b7; font-size:.9rem; line-height:1.65; max-width:32rem; }
+        .search-kicker {
+            display:inline-flex; align-items:center; gap:.45rem; width:max-content;
+            color:#8fc0ff; background:rgba(22,119,255,.1); border:1px solid rgba(96,165,250,.2);
+            padding:.45rem .7rem; border-radius:999px; font-size:.73rem; font-weight:700;
+        }
+        .quick-tags { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+        .quick-tag {
+            display:inline-flex; align-items:center; gap:.4rem; padding:.5rem .7rem;
+            border-radius:999px; font-size:.78rem; font-weight:600; color:#d8e5f5;
+            background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+        }
+        .quick-tag i { color:#7eb6ff; }
+        .search-image-panel {
+            position:relative; overflow:hidden;
+            background:radial-gradient(circle at top right, rgba(24,119,242,.16), transparent 35%), linear-gradient(180deg, rgba(10,15,26,.96), rgba(10,15,26,.9));
+        }
+        .search-image-panel::after {
+            content:''; position:absolute; inset:auto -10% -28% auto; width:240px; height:240px; border-radius:999px;
+            background:radial-gradient(circle, rgba(0,212,255,.18), transparent 70%); filter:blur(10px); pointer-events:none;
+        }
+        .home-search-form {
+            display:flex; align-items:center; gap:.6rem; min-height:54px;
+            background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
+            border-radius:1rem; padding:.35rem .4rem .35rem 1rem; margin-bottom:1rem;
+            transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+        .home-search-form:focus-within {
+            border-color:rgba(96,165,250,.55); background:rgba(255,255,255,.055);
+            box-shadow:0 0 0 3px rgba(59,130,246,.08);
+        }
+        .home-search-form > i { color:#7eb6ff; flex-shrink:0; }
+        .home-search-input {
+            flex:1; min-width:0; background:transparent; border:0; outline:0; color:#fff;
+            font:inherit; font-size:.9rem; padding:.55rem 0;
+        }
+        .home-search-input::placeholder { color:#8c9aaf; opacity:1; }
+        .home-search-button {
+            flex-shrink:0; min-height:42px; padding:0 .9rem; border-radius:.75rem;
+            display:inline-flex; align-items:center; justify-content:center; gap:.45rem;
+            background:#1677ff; color:#fff; font-size:.78rem; font-weight:800;
+            transition:background .18s ease, transform .18s ease;
+        }
+        .home-search-button:hover { background:#2a84ff; transform:translateY(-1px); }
+        .search-app-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+        .search-app-card {
+            width:100%; text-align:left; cursor:pointer;
+            background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+            border-radius:1rem; padding:.85rem; display:flex; gap:.7rem; align-items:flex-start;
+            transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+        }
+        .search-app-card:hover {
+            transform:translateY(-2px); background:rgba(255,255,255,.065);
+            border-color:rgba(96,165,250,.35); box-shadow:0 10px 30px rgba(0,0,0,.16);
+        }
+        .search-app-card:focus-visible { outline:2px solid #60a5fa; outline-offset:2px; }
+        .search-app-icon {
+            width:2.4rem; height:2.4rem; border-radius:.85rem; flex-shrink:0;
+            display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+            background:rgba(22,119,255,.12); border:1px solid rgba(96,165,250,.16);
+        }
+        .search-app-text strong { display:block; color:#fff; font-size:.88rem; }
+        .search-app-text small { display:block; margin-top:.18rem; color:#97a8bc; line-height:1.45; font-size:.73rem; }
+
+        /* Promociones más visuales */
+        #promotionsArea { scroll-margin-top: 96px; }
+        #promoCarousel > .snap-center { min-height: 380px !important; border-radius: 1.35rem !important; box-shadow:none !important; }
+        .promo-slide {
+            border:1px solid rgba(255,255,255,.08) !important;
+            background:linear-gradient(180deg, rgba(10,15,26,.98), rgba(10,15,26,.95)) !important;
+        }
+        .promo-slide:hover .promo-bg-image { transform:scale(1.06); }
+        .promo-visual {
+            position:relative; isolation:isolate; overflow:hidden;
+            min-height:260px;
+        }
+        .promo-bg-image { transition:transform .6s ease; filter:saturate(1.05) contrast(1.04); }
+        .promo-darken {
+            position:absolute; inset:0;
+            background:linear-gradient(180deg, rgba(3,5,8,.2), rgba(3,5,8,.6));
+            z-index:1;
+        }
+        .promo-glow {
+            position:absolute; inset:0; z-index:2; mix-blend-mode:screen; opacity:.95;
+        }
+        .promo-top-row {
+            position:absolute; top:1rem; left:1rem; right:1rem; z-index:3;
+            display:flex; justify-content:space-between; gap:.5rem; flex-wrap:wrap;
+        }
+        .promo-chip {
+            display:inline-flex; align-items:center; gap:.4rem; padding:.46rem .7rem;
+            border-radius:999px; font-size:.7rem; font-weight:800; letter-spacing:.02em;
+            color:#fff; background:rgba(3,5,8,.48); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(10px);
+        }
+        .promo-chip.alt { color:#dfe9f7; }
+        .promo-badge-box {
+            position:absolute; left:1rem; bottom:1rem; z-index:3; max-width:calc(100% - 2rem - 145px);
+            background:rgba(5,10,18,.6); border:1px solid rgba(255,255,255,.12);
+            border-radius:1.1rem; padding:.95rem; backdrop-filter:blur(12px);
+        }
+        .promo-badge-box .promo-app-name { color:#fff; font-size:1.05rem; font-weight:800; line-height:1.1; }
+        .promo-badge-box .promo-app-sub { color:#b4c4d7; font-size:.77rem; margin-top:.22rem; }
+        .promo-badge-box .promo-mini-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.7rem; }
+        .promo-badge-box .promo-mini-tags span {
+            padding:.34rem .55rem; border-radius:999px; font-size:.68rem; font-weight:700;
+            color:#f5f8fc; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08);
+        }
+        .promo-price-float {
+            position:absolute; right:1rem; bottom:1rem; z-index:3;
+            min-width:130px; text-align:right;
+            background:rgba(255,255,255,.92); color:#0b1220;
+            border-radius:1rem; padding:.7rem .8rem; box-shadow:0 16px 30px rgba(0,0,0,.28);
+        }
+        .promo-price-float small { display:block; font-size:.62rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#526175; }
+        .promo-price-float strong { display:block; font-size:1.2rem; line-height:1.1; font-weight:900; }
+        .promo-price-float span { display:block; font-size:.72rem; color:#516074; margin-top:.1rem; }
+        #promoCarousel .font-orbitron { letter-spacing:-.02em; }
+        #promoCarousel button { box-shadow:none !important; }
+
+        /* Catálogo */
+        #promotionsArea { scroll-margin-top: 96px; }
+        #promoCarousel > .snap-center { min-height: 360px !important; border-radius: 1.35rem !important; box-shadow:none !important; }
+        #promoCarousel .font-orbitron { letter-spacing:-.02em; }
+        #promoCarousel button { box-shadow:none !important; }
+
+        /* Catálogo */
+        #heroSection { margin-top: 7.2rem !important; }
+        #announcementBanner { box-shadow:none !important; max-width: 720px; }
+        #productGrid { row-gap: 1rem !important; column-gap: 1rem !important; }
+        #productGrid .glass-card { padding: 1.2rem !important; }
+        #searchContainer input {
+            background:rgba(255,255,255,.035) !important;
+            border-color:var(--line) !important;
+            min-height:50px;
+        }
+        #searchContainer input:focus { border-color:#3b82f6 !important; box-shadow:0 0 0 3px rgba(59,130,246,.08); }
+
+        .modal-content { border-radius:1.35rem !important; }
+
+        /* Accesibilidad y legibilidad */
+        button:focus-visible, a:focus-visible, input:focus-visible {
+            outline: 2px solid #60a5fa; outline-offset: 3px;
+        }
+
+        @media (max-width: 767px) {
+            .hero-clean { padding-top: 2.1rem; }
+            .hero-clean h2 { font-size: clamp(2.25rem, 12vw, 3.6rem) !important; }
+            .hero-actions > * { width:100%; }
+            .steps-grid, .choice-grid, .search-showcase, .search-app-grid { grid-template-columns:1fr; }
+            .section-clean { margin-top:2.7rem; }
+            #promoCarousel > .snap-center { min-height: 520px !important; }
+            #filterBar { justify-content:flex-start !important; }
+            .promo-top-row { right:auto; max-width:calc(100% - 2rem); }
+            .promo-price-float { right:1rem; bottom:1rem; }
+            .promo-badge-box { right:1rem; bottom:4.9rem; max-width:calc(100% - 2rem); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+        }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -389,6 +711,13 @@
                     <i class="fas fa-home"></i>
                 </button>
 
+                <button onclick="loadUniverse('all')" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-all text-xs font-bold">
+                    <i class="fas fa-th-large"></i> Catálogo
+                </button>
+                <button onclick="contactSupport()" class="w-10 h-10 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 hover:bg-green-500/20 transition-all flex items-center justify-center" aria-label="Contactar por WhatsApp">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                </button>
+
                 <a href="https://www.instagram.com/nexuspreds.mx" 
                    target="_blank" 
                    class="w-10 h-10 rounded-full bg-white/5 border border-blue-500/20 text-white hover:text-blue-400 hover:border-blue-400 hover:bg-blue-500/10 transition-all flex items-center justify-center hover:scale-110">
@@ -401,25 +730,38 @@
     <!-- ============================================== -->
     <!-- 1. SECCIÓN HOME (SELECCIÓN DE UNIVERSO Y PROMOCIONES) -->
     <!-- ============================================== -->
-    <section id="homeSection" class="flex-grow flex flex-col items-center justify-center px-4 mt-24 relative z-10 animate-fade-in py-10">
-        
-        <div class="mb-8 inline-flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-2.5 rounded-full backdrop-blur-md">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span class="text-xs font-space tracking-widest uppercase text-gray-300 font-semibold">Sistemas En Línea</span>
-        </div>
+    <section id="homeSection" class="flex-grow px-4 mt-20 relative z-10 animate-fade-in py-8">
+        <div class="home-shell">
+            <!-- HERO: explica inmediatamente qué se vende y cómo comprar -->
+            <div class="hero-clean">
+                <span class="eyebrow"><span class="w-2 h-2 rounded-full bg-green-400"></span> Catálogo digital disponible</span>
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-orbitron font-black leading-tight">
+                    Streaming, IA y herramientas <span class="gradient-text">premium</span>
+                </h2>
+                <p class="lead">
+                    Elige tu plataforma, revisa el precio y pídela por WhatsApp. Manejamos opciones como Netflix, Spotify, Prime Video, Disney+, Gemini, Canva, Microsoft 365 y más.
+                </p>
+                <div class="hero-actions">
+                    <button onclick="document.getElementById('promotionsArea').scrollIntoView({behavior:'smooth'})" class="primary-cta">
+                        <i class="fas fa-bolt"></i> Ver promociones
+                    </button>
+                    <button onclick="loadUniverse('all')" class="secondary-cta">
+                        <i class="fas fa-th-large"></i> Ver catálogo
+                    </button>
+                </div>
+                <div class="trust-row">
+                    <span class="trust-chip"><i class="fab fa-whatsapp"></i> Pedido por WhatsApp</span>
+                    <span class="trust-chip"><i class="fas fa-bolt"></i> Entrega rápida</span>
+                    <span class="trust-chip"><i class="fas fa-shield-alt"></i> Garantía según producto</span>
+                    <span class="trust-chip"><i class="fas fa-tags"></i> Precio visible antes de comprar</span>
+                </div>
+            </div>
 
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-orbitron font-black mb-4 text-center leading-tight">
-            ACCESO <br><span class="gradient-text block mt-2">PREMIUM</span>
-        </h2>
-        <p class="text-gray-400 font-space text-sm md:text-base max-w-xl text-center mb-12">
-            Elige el catálogo que deseas explorar. Cuentas premium, herramientas creativas o los mejores títulos de videojuegos a tu alcance.
-        </p>
-
-        <!-- SECCIÓN DE ANUNCIOS / PROMOCIONES -->
-        <div class="w-full mb-16 relative px-4 md:px-0">
+            <!-- SECCIÓN DE ANUNCIOS / PROMOCIONES -->
+        <div id="promotionsArea" class="w-full mb-12 relative px-0">
             <div class="text-center mb-8">
-                <h3 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">Promociones <span class="gradient-text">Destacadas</span></h3>
-                <p class="text-gray-400 font-space text-sm">Desliza para descubrir nuestras mejores ofertas</p>
+                <h3 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">Ofertas <span class="gradient-text">destacadas</span></h3>
+                <p class="text-gray-400 font-space text-sm">Empieza aquí: elige una promoción y pídela directo por WhatsApp</p>
             </div>
 
             <div class="relative w-full max-w-[1200px] mx-auto group">
@@ -435,7 +777,7 @@
                 <div id="promoCarousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 px-[5vw] md:px-[calc(50%-450px)] no-scrollbar scroll-smooth py-4 items-stretch">
                     
                     <!-- PROMOCIÓN GEMINI -->
-                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,102,255,0.15)] bg-[#0a0f1a]">
+                    <div class="promo-slide snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,102,255,0.15)] bg-[#0a0f1a]">
                         <!-- Text Side -->
                         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
                             <span class="text-blue-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">INTELIGENCIA ARTIFICIAL</span>
@@ -447,15 +789,29 @@
                             </button>
                         </div>
                         <!-- Image Side -->
-                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
-                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
-                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
-                            <img src="image_301d41.jpg" alt="Gemini AI" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover md:object-contain object-center transition-transform duration-700 hover:scale-105">
+                        <div class="promo-visual w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <img src="image_301d41.jpg" alt="Gemini AI" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80'" class="promo-bg-image w-full h-full object-cover md:object-contain object-center">
+                            <div class="promo-darken"></div>
+                            <div class="promo-glow" style="background:radial-gradient(circle at 70% 30%, rgba(59,130,246,.42), transparent 38%), radial-gradient(circle at 30% 76%, rgba(34,211,238,.22), transparent 34%);"></div>
+                            <div class="promo-top-row">
+                                <span class="promo-chip"><i class="fab fa-whatsapp"></i> Pídelo hoy</span>
+                                <span class="promo-chip alt">Entrega inmediata</span>
+                            </div>
+                            <div class="promo-badge-box">
+                                <div class="promo-app-name">Gemini Advanced</div>
+                                <div class="promo-app-sub">Inteligencia artificial + almacenamiento en la nube</div>
+                                <div class="promo-mini-tags"><span>Correo propio</span><span>5TB</span><span>IA premium</span></div>
+                            </div>
+                            <div class="promo-price-float">
+                                <small>Desde</small>
+                                <strong>$60</strong>
+                                <span>1, 3 o 6 meses</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- PROMOCIÓN PRIME VIDEO -->
-                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(6,182,212,0.15)] bg-[#0a0f1a]">
+                    <div class="promo-slide snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(6,182,212,0.15)] bg-[#0a0f1a]">
                         <!-- Text Side -->
                         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
                             <span class="text-cyan-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">CINE Y SERIES</span>
@@ -472,15 +828,29 @@
                             </div>
                         </div>
                         <!-- Image Side -->
-                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
-                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
-                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
-                            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80" alt="Prime Video" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
+                        <div class="promo-visual w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80" alt="Prime Video" class="promo-bg-image w-full h-full object-cover object-center">
+                            <div class="promo-darken"></div>
+                            <div class="promo-glow" style="background:radial-gradient(circle at 68% 24%, rgba(34,211,238,.32), transparent 40%), radial-gradient(circle at 26% 78%, rgba(14,165,233,.2), transparent 36%);"></div>
+                            <div class="promo-top-row">
+                                <span class="promo-chip"><i class="fab fa-whatsapp"></i> Compra rápida</span>
+                                <span class="promo-chip alt">Sin anuncios</span>
+                            </div>
+                            <div class="promo-badge-box">
+                                <div class="promo-app-name">Prime Video</div>
+                                <div class="promo-app-sub">Películas, series y estrenos para ver al instante</div>
+                                <div class="promo-mini-tags"><span>HD / 4K</span><span>1 o 6 meses</span><span>Privada</span></div>
+                            </div>
+                            <div class="promo-price-float">
+                                <small>Promoción</small>
+                                <strong>$50</strong>
+                                <span>1 mes</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- PROMOCIÓN NETFLIX -->
-                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(239,68,68,0.15)] bg-[#0a0f1a]">
+                    <div class="promo-slide snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(239,68,68,0.15)] bg-[#0a0f1a]">
                         <!-- Text Side -->
                         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
                             <span class="text-red-500 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">MÁS VENDIDO</span>
@@ -492,15 +862,29 @@
                             </button>
                         </div>
                         <!-- Image Side -->
-                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
-                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
-                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
-                            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=800&q=80" alt="Netflix" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
+                        <div class="promo-visual w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=800&q=80" alt="Netflix" class="promo-bg-image w-full h-full object-cover object-center">
+                            <div class="promo-darken"></div>
+                            <div class="promo-glow" style="background:radial-gradient(circle at 72% 28%, rgba(239,68,68,.34), transparent 38%), radial-gradient(circle at 32% 76%, rgba(185,28,28,.18), transparent 34%);"></div>
+                            <div class="promo-top-row">
+                                <span class="promo-chip"><i class="fab fa-whatsapp"></i> Pedido directo</span>
+                                <span class="promo-chip alt">Perfil exclusivo</span>
+                            </div>
+                            <div class="promo-badge-box">
+                                <div class="promo-app-name">Netflix</div>
+                                <div class="promo-app-sub">Ideal para series, películas y contenido global</div>
+                                <div class="promo-mini-tags"><span>1 mes</span><span>Renovable</span><span>Alta calidad</span></div>
+                            </div>
+                            <div class="promo-price-float">
+                                <small>Precio</small>
+                                <strong>$80</strong>
+                                <span>por perfil</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- PROMOCIÓN CANVA -->
-                    <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(168,85,247,0.15)] bg-[#0a0f1a]">
+                    <div class="promo-slide snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[500px] md:min-h-[400px] flex flex-col-reverse md:flex-row relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(168,85,247,0.15)] bg-[#0a0f1a]">
                         <!-- Text Side -->
                         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10">
                             <span class="text-purple-400 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 drop-shadow-md">OFERTA ANUAL</span>
@@ -512,13 +896,26 @@
                             </button>
                         </div>
                         <!-- Image Side -->
-                        <div class="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
-                            <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0f1a] to-transparent z-10 hidden md:block"></div>
-                            <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 md:hidden"></div>
-                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Canva" class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105">
+                        <div class="promo-visual w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden bg-[#030508]">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Canva" class="promo-bg-image w-full h-full object-cover object-center">
+                            <div class="promo-darken"></div>
+                            <div class="promo-glow" style="background:radial-gradient(circle at 75% 28%, rgba(168,85,247,.34), transparent 36%), radial-gradient(circle at 30% 78%, rgba(59,130,246,.2), transparent 34%);"></div>
+                            <div class="promo-top-row">
+                                <span class="promo-chip"><i class="fab fa-whatsapp"></i> Pídelo al instante</span>
+                                <span class="promo-chip alt">Invitación oficial</span>
+                            </div>
+                            <div class="promo-badge-box">
+                                <div class="promo-app-name">Canva Pro</div>
+                                <div class="promo-app-sub">Plantillas, edición premium y herramientas creativas</div>
+                                <div class="promo-mini-tags"><span>1 año</span><span>Diseño</span><span>Cuenta original</span></div>
+                            </div>
+                            <div class="promo-price-float">
+                                <small>Todo el año</small>
+                                <strong>$200</strong>
+                                <span>por invitación</span>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -528,47 +925,102 @@
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6 w-full max-w-5xl mx-auto">
-            <!-- Opción Streaming -->
-            <div onclick="loadUniverse('streaming')" class="glass-card p-10 md:p-14 rounded-[2rem] flex flex-col items-center text-center group">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center mb-8 group-hover:-translate-y-4 transition-transform duration-500 shadow-[0_0_30px_rgba(0,102,255,0.2)] border border-blue-500/30">
-                    <i class="fas fa-play text-4xl text-blue-400 group-hover:text-white transition-colors"></i>
-                </div>
-                <h3 class="font-orbitron text-2xl md:text-3xl font-bold mb-3 text-white group-hover:text-blue-300 transition-colors">Streaming & I.A.</h3>
-                <p class="text-gray-400 text-sm md:text-base mb-8">Plataformas de entretenimiento, música, inteligencia artificial y herramientas de creatividad.</p>
-                
-                <button class="mt-auto px-8 py-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 font-bold uppercase tracking-widest text-xs group-hover:bg-blue-500 group-hover:text-white transition-all w-full">
-                    Explorar Catálogo
-                </button>
-            </div>
 
-            <!-- Opción Referencias -->
-            <div onclick="loadReferencesFromHome()" class="glass-card p-10 md:p-14 rounded-[2rem] flex flex-col items-center text-center group">
-                <div class="absolute inset-0 bg-gradient-to-br from-yellow-600/10 to-transparent rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-amber-500/20 flex items-center justify-center mb-8 group-hover:-translate-y-4 transition-transform duration-500 shadow-[0_0_30px_rgba(251,191,36,0.2)] border border-yellow-500/30">
-                    <i class="fas fa-star text-4xl text-yellow-400 group-hover:text-white transition-colors"></i>
+        
+<!-- ACCESOS PRINCIPALES -->
+            <section class="section-clean">
+                <div class="section-heading">
+                    <h3 class="font-orbitron font-bold text-white">¿Qué estás buscando?</h3>
+                    <p>Entra directo a la sección que necesitas.</p>
                 </div>
-                <h3 class="font-orbitron text-2xl md:text-3xl font-bold mb-3 text-white group-hover:text-yellow-300 transition-colors">Referencias</h3>
-                <p class="text-gray-400 text-sm md:text-base mb-8">Evidencia real de clientes satisfechos y garantía de nuestro servicio premium.</p>
-                
-                <button class="mt-auto px-8 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-bold uppercase tracking-widest text-xs group-hover:bg-yellow-500 group-hover:text-black transition-all w-full">
-                    Ver Galería
-                </button>
-            </div>
-        </div>
-
-        <!-- Botón Ver Todo el Catálogo -->
-        <div class="mt-10 w-full max-w-5xl mx-auto">
-            <button onclick="loadUniverse('all')" class="w-full glass-card all-card p-6 rounded-2xl flex items-center justify-center gap-4 text-white hover:text-emerald-300 transition-colors group">
-                <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/40 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-globe text-emerald-400 text-xl"></i>
+                <div class="search-showcase">
+                    <div class="search-copy-panel">
+                        <span class="search-kicker"><i class="fas fa-wand-magic-sparkles"></i> Búsqueda rápida</span>
+                        <h4>Una vista más intuitiva para encontrar tu producto</h4>
+                        <p>Si una persona entra sin conocer la página, aquí entiende de inmediato qué puede comprar: streaming, música, inteligencia artificial, diseño y herramientas digitales.</p>
+                        <div class="quick-tags">
+                            <span class="quick-tag"><i class="fas fa-film"></i> Películas y series</span>
+                            <span class="quick-tag"><i class="fas fa-music"></i> Música premium</span>
+                            <span class="quick-tag"><i class="fas fa-robot"></i> IA y productividad</span>
+                            <span class="quick-tag"><i class="fas fa-palette"></i> Diseño y creatividad</span>
+                        </div>
+                    </div>
+                    <div class="search-image-panel">
+                        <form class="home-search-form" onsubmit="searchFromHome(event)">
+                            <i class="fas fa-search"></i>
+                            <input id="homeSearchInput" class="home-search-input" type="search" autocomplete="off" placeholder="Busca Netflix, Spotify, Gemini, Canva..." aria-label="Buscar productos en NexusPreds">
+                            <button type="submit" class="home-search-button"><i class="fas fa-arrow-right"></i><span class="hidden sm:inline">Buscar</span></button>
+                        </form>
+                        <div class="search-app-grid">
+                            <button type="button" class="search-app-card" onclick="openQuickCategory('video')" aria-label="Ver aplicaciones de streaming">
+                                <div class="search-app-icon">🎬</div>
+                                <div class="search-app-text"><strong>Streaming</strong><small>Netflix, Prime Video, Disney+, HBO y más.</small></div>
+                            </button>
+                            <button type="button" class="search-app-card" onclick="openQuickCategory('music')" aria-label="Ver aplicaciones de música">
+                                <div class="search-app-icon">🎵</div>
+                                <div class="search-app-text"><strong>Música</strong><small>Spotify, Deezer y YouTube Premium.</small></div>
+                            </button>
+                            <button type="button" class="search-app-card" onclick="openQuickCategory('ia')" aria-label="Ver aplicaciones de inteligencia artificial">
+                                <div class="search-app-icon">🤖</div>
+                                <div class="search-app-text"><strong>Inteligencia artificial</strong><small>Gemini, ChatGPT y herramientas para estudiar, trabajar y crear.</small></div>
+                            </button>
+                            <button type="button" class="search-app-card" onclick="openQuickCategory('diseno')" aria-label="Ver aplicaciones de diseño y creatividad">
+                                <div class="search-app-icon">🎨</div>
+                                <div class="search-app-text"><strong>Diseño y apps</strong><small>Canva, CapCut, Autodesk, Wondershare y más.</small></div>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-orbitron font-bold text-xl md:text-2xl uppercase tracking-widest">Explorar Catálogo Completo</span>
-            </button>
-        </div>
+                <div class="choice-grid">
+                    <div onclick="loadUniverse('streaming')" class="choice-card">
+                        <div class="choice-icon"><i class="fas fa-play"></i></div>
+                        <h4>Streaming, IA y apps</h4>
+                        <p>Entretenimiento, música, inteligencia artificial, productividad y herramientas creativas.</p>
+                        <span class="choice-link">Explorar productos <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div onclick="loadUniverse('all')" class="choice-card">
+                        <div class="choice-icon"><i class="fas fa-th-large"></i></div>
+                        <h4>Catálogo completo</h4>
+                        <p>Consulta todos los productos disponibles y filtra por categoría o nombre.</p>
+                        <span class="choice-link">Ver todo <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div onclick="loadReferencesFromHome()" class="choice-card">
+                        <div class="choice-icon" style="color:#fbbf24;background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.18)"><i class="fas fa-star"></i></div>
+                        <h4>Referencias</h4>
+                        <p>Consulta la galería de evidencia y experiencias de clientes antes de realizar tu compra.</p>
+                        <span class="choice-link" style="color:#fbbf24">Ver referencias <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </section>
 
-        <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+        
+<!-- CÓMO COMPRAR -->
+            <section id="howToBuy" class="section-clean scroll-mt-28">
+                <div class="section-heading">
+                    <h3 class="font-orbitron font-bold text-white">Comprar es muy sencillo</h3>
+                    <p>No necesitas registrarte ni aprender a usar la página.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Elige el producto</h4>
+                        <p>Abre el catálogo, busca la plataforma que quieres y revisa duración, tipo de acceso y precio.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Presiona “Comprar”</h4>
+                        <p>Te enviamos automáticamente a WhatsApp con el nombre y precio del producto ya escritos.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Recibe tu acceso</h4>
+                        <p>Confirmas el pago y recibes el acceso, perfil o invitación de acuerdo con el producto elegido.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+<!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
         <div class="w-full max-w-5xl mx-auto mt-20 mb-10 text-left">
             <div class="text-center mb-10">
                 <h3 class="font-orbitron text-3xl md:text-4xl font-bold mb-3 gradient-text uppercase">Preguntas Frecuentes</h3>
@@ -629,6 +1081,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <!-- ============================================== -->
@@ -642,7 +1095,7 @@
             <div id="announcementBanner" class="mb-8 w-full max-w-2xl mx-auto rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 p-[2px] animate-fade-in shadow-[0_0_40px_rgba(0,102,255,0.3)]">
                 <div class="bg-gradient-to-r from-slate-900 to-slate-950 backdrop-blur-xl rounded-2xl py-3 px-6 flex items-center justify-center gap-4 border border-white/5">
                     <span class="text-2xl animate-bounce" style="animation-duration: 1.5s;">🚀</span>
-                    <p class="font-orbitron font-bold text-xs md:text-sm tracking-widest text-transparent bg-gradient-to-r from-white to-blue-300 bg-clip-text uppercase">¡Nuevos Productos Agregados!</p>
+                    <p class="font-orbitron font-bold text-xs md:text-sm tracking-widest text-transparent bg-gradient-to-r from-white to-blue-300 bg-clip-text uppercase">Productos disponibles y precios actualizados</p>
                     <span class="text-2xl animate-bounce" style="animation-delay: 0.2s; animation-duration: 1.5s;">🔥</span>
                 </div>
             </div>
@@ -652,11 +1105,11 @@
             </div>
 
             <h2 id="mainTitle" class="text-5xl md:text-7xl font-orbitron font-black mb-6 animate-fade-in tracking-tighter leading-tight" style="animation-delay: 0.1s">
-                NEXUS <span class="gradient-text">CATÁLOGO</span>
+                Elige tu <span class="gradient-text">producto</span>
             </h2>
 
             <p id="mainSubtitle" class="text-gray-300/90 max-w-2xl mx-auto animate-fade-in text-sm md:text-lg leading-relaxed font-space" style="animation-delay: 0.2s">
-                Explora nuestro catálogo oficial. <span class="text-blue-400 font-semibold" id="highlightSub1">Entrega inmediata</span> y <span class="text-blue-400 font-semibold" id="highlightSub2">soporte técnico</span> incluido.
+                Busca por nombre, filtra por categoría y revisa el precio antes de comprar. <span class="text-blue-400 font-semibold" id="highlightSub1">Entrega rápida</span> y <span class="text-blue-400 font-semibold" id="highlightSub2">soporte</span> según producto.
             </p>
         </section>
 
@@ -666,7 +1119,7 @@
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400"></i>
                 </div>
-                <input type="text" id="searchInput" onkeyup="handleSearch()" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors" placeholder="Buscar productos...">
+                <input type="text" id="searchInput" onkeyup="handleSearch()" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors" placeholder="Busca Netflix, Spotify, Gemini, Canva...">
             </div>
         </div>
 
@@ -727,7 +1180,7 @@
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 text-center">
-                <p class="text-[10px] text-gray-600 uppercase tracking-[0.3em] font-semibold">© 2024 NexusPreds MX | All Rights Reserved</p>
+                <p class="text-[10px] text-gray-600 uppercase tracking-[0.3em] font-semibold">© 2026 NexusPreds MX | All Rights Reserved</p>
             </div>
         </div>
     </footer>
@@ -747,7 +1200,8 @@
             ],
             streaming: [
                 { id: 'all', label: 'Todos' },
-                { id: 'streaming', label: 'Streaming Video/Música' },
+                { id: 'video', label: 'Streaming' },
+                { id: 'music', label: 'Música' },
                 { id: 'ia', label: 'Inteligencia Artificial' },
                 { id: 'diseno', label: 'Creatividad & Diseño' },
                 { id: 'otros', label: 'Otros' },
@@ -830,9 +1284,87 @@
         ];
 
         // --- NAVEGACIÓN Y RENDERIZADO ---
+        function normalizeSearchText(value) {
+            return (value || '')
+                .toString()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .trim();
+        }
+
+        function isMusicProduct(product) {
+            const name = normalizeSearchText(product.name);
+            return name.includes('spotify') || name.includes('deezer') || name.includes('youtube premium');
+        }
+
+        function matchesCategory(product, category) {
+            if (category === 'all') return true;
+            if (category === 'video') return product.cat === 'streaming' && !normalizeSearchText(product.name).includes('spotify') && !normalizeSearchText(product.name).includes('deezer');
+            if (category === 'music') return isMusicProduct(product);
+            return product.cat === category;
+        }
+
+        function categoryLabel(category) {
+            const labels = {
+                video: 'Streaming',
+                music: 'Música',
+                ia: 'Inteligencia Artificial',
+                diseno: 'Diseño y creatividad',
+                otros: 'Otros'
+            };
+            return labels[category] || 'Productos';
+        }
+
+        function openQuickCategory(category) {
+            loadUniverse('streaming');
+            currentCategory = category;
+            currentSearch = '';
+            const catalogSearch = document.getElementById('searchInput');
+            if (catalogSearch) catalogSearch.value = '';
+            renderFilterBar();
+            renderProducts();
+
+            const titleEl = document.getElementById('mainTitle');
+            const heroBadge = document.getElementById('heroBadge');
+            if (titleEl) titleEl.innerHTML = `${categoryLabel(category)} <span class="gradient-text">premium</span>`;
+            if (heroBadge) heroBadge.innerHTML = `<i class="fas fa-filter mr-2 text-blue-400"></i>${categoryLabel(category).toUpperCase()}`;
+        }
+
+        function searchFromHome(event) {
+            if (event) event.preventDefault();
+            const homeInput = document.getElementById('homeSearchInput');
+            const raw = homeInput ? homeInput.value.trim() : '';
+            const term = normalizeSearchText(raw);
+            if (!term) {
+                if (homeInput) homeInput.focus();
+                return;
+            }
+
+            const categoryAliases = {
+                'streaming': 'video', 'peliculas': 'video', 'peliculas y series': 'video', 'series': 'video', 'cine': 'video',
+                'musica': 'music', 'audio': 'music', 'spotify': null, 'deezer': null,
+                'ia': 'ia', 'inteligencia artificial': 'ia', 'inteligencia': 'ia',
+                'diseno': 'diseno', 'creatividad': 'diseno', 'diseño': 'diseno'
+            };
+
+            if (Object.prototype.hasOwnProperty.call(categoryAliases, term) && categoryAliases[term]) {
+                openQuickCategory(categoryAliases[term]);
+                return;
+            }
+
+            loadUniverse('all');
+            currentSearch = term;
+            const catalogSearch = document.getElementById('searchInput');
+            if (catalogSearch) catalogSearch.value = raw;
+            renderProducts();
+        }
+
         function showHome() {
             currentUniverse = 'home';
             document.getElementById('searchInput').value = '';
+            const homeSearchInput = document.getElementById('homeSearchInput');
+            if (homeSearchInput) homeSearchInput.value = '';
             currentSearch = '';
 
             document.getElementById('homeSection').classList.remove('hidden');
@@ -888,22 +1420,22 @@
             const heroBadge = document.getElementById('heroBadge');
 
             if (universe === 'all') {
-                titleEl.innerHTML = `CATÁLOGO <span class="gradient-text-all">COMPLETO</span>`;
-                subH1.textContent = "Todo en un solo lugar";
+                titleEl.innerHTML = `Todos los <span class="gradient-text-all">productos</span>`;
+                subH1.textContent = "Precios visibles";
                 subH1.className = "text-emerald-400 font-semibold";
-                subH2.textContent = "soporte 24/7";
+                subH2.textContent = "compra por WhatsApp";
                 subH2.className = "text-emerald-400 font-semibold";
-                heroBadge.innerHTML = `<i class="fas fa-globe mr-2 text-emerald-400"></i>TODOS NUESTROS PRODUCTOS DISPONIBLES`;
+                heroBadge.innerHTML = `<i class="fas fa-globe mr-2 text-emerald-400"></i>CATÁLOGO COMPLETO`;
                 
                 document.getElementById('sphere1').style.background = 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%)';
                 document.getElementById('sphere2').style.background = 'radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%)';
             } else {
-                titleEl.innerHTML = `NEXUS <span class="gradient-text">STREAMING</span>`;
-                subH1.textContent = "Entrega inmediata";
+                titleEl.innerHTML = `Streaming, IA y <span class="gradient-text">apps</span>`;
+                subH1.textContent = "Elige y compara";
                 subH1.className = "text-blue-400 font-semibold";
-                subH2.textContent = "soporte técnico";
+                subH2.textContent = "compra por WhatsApp";
                 subH2.className = "text-blue-400 font-semibold";
-                heroBadge.innerHTML = `<i class="fas fa-play mr-2 text-blue-400"></i>CATÁLOGO DE STREAMING E I.A.`;
+                heroBadge.innerHTML = `<i class="fas fa-play mr-2 text-blue-400"></i>STREAMING, I.A. Y HERRAMIENTAS`;
                 
                 document.getElementById('sphere1').style.background = 'radial-gradient(circle, rgba(0, 102, 255, 0.12) 0%, transparent 70%)';
                 document.getElementById('sphere2').style.background = 'radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%)';
@@ -936,10 +1468,19 @@
                     btn.innerHTML = f.label;
                     btn.onclick = () => {
                         currentCategory = f.id;
+                        currentSearch = '';
+                        document.getElementById('searchInput').value = '';
                         document.getElementById('referencesSection').classList.add('hidden');
                         document.getElementById('heroSection').classList.remove('hidden');
                         document.getElementById('searchContainer').classList.remove('hidden');
                         document.getElementById('productGrid').classList.remove('hidden');
+                        if (f.id !== 'all') {
+                            document.getElementById('mainTitle').innerHTML = `${categoryLabel(f.id)} <span class="gradient-text">premium</span>`;
+                            document.getElementById('heroBadge').innerHTML = `<i class="fas fa-filter mr-2 text-blue-400"></i>${categoryLabel(f.id).toUpperCase()}`;
+                        } else {
+                            document.getElementById('mainTitle').innerHTML = `Streaming, IA y <span class="gradient-text">apps</span>`;
+                            document.getElementById('heroBadge').innerHTML = `<i class="fas fa-play mr-2 text-blue-400"></i>STREAMING, I.A. Y HERRAMIENTAS`;
+                        }
                         renderFilterBar();
                         renderProducts();
                     };
@@ -949,7 +1490,7 @@
         }
 
         function handleSearch() {
-            currentSearch = document.getElementById('searchInput').value.toLowerCase();
+            currentSearch = normalizeSearchText(document.getElementById('searchInput').value);
             renderProducts();
         }
 
@@ -962,22 +1503,28 @@
             if (currentUniverse !== 'all') {
                 filtered = filtered.filter(p => p.universe === currentUniverse);
                 if (currentCategory !== 'all') {
-                    filtered = filtered.filter(p => p.cat === currentCategory);
-                }
-            } else {
-                if (currentCategory !== 'all') {
-                    filtered = filtered.filter(p => p.universe === currentCategory);
+                    filtered = filtered.filter(p => matchesCategory(p, currentCategory));
                 }
             }
 
             if (currentSearch) {
-                filtered = filtered.filter(p => p.name.toLowerCase().includes(currentSearch) || p.desc.toLowerCase().includes(currentSearch));
+                filtered = filtered.filter(p => {
+                    const searchable = normalizeSearchText([
+                        p.name,
+                        p.desc,
+                        p.type,
+                        p.val,
+                        p.cat,
+                        ...(p.benefits || [])
+                    ].join(' '));
+                    return searchable.includes(currentSearch);
+                });
             }
 
             filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-500 font-orbitron">No se encontraron productos en esta categoría o búsqueda.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-gray-500 font-orbitron">No encontramos productos con esa búsqueda. Prueba con Netflix, Spotify, Gemini, Canva o cambia de categoría.</div>`;
                 return;
             }
 
@@ -1014,9 +1561,10 @@
                         </div>
                     </div>
                     
-                    <h3 class="text-base font-bold text-white mb-2 tracking-tight leading-snug line-clamp-2">${p.name}</h3>
+                    <h3 class="text-base font-bold text-white mb-1 tracking-tight leading-snug line-clamp-2">${p.name}</h3>
+                    <p class="text-[10px] text-gray-500">Toca la tarjeta para ver detalles</p>
                     
-                    <div class="space-y-2 mb-8 text-xs mt-4">
+                    <div class="space-y-2 mb-7 text-xs mt-4">
                         <div class="flex items-center gap-2 text-gray-400">
                             <i class="far fa-clock text-blue-400/70"></i>
                             <span>${p.val}</span>
@@ -1032,8 +1580,8 @@
                             <p class="text-[9px] text-gray-500 uppercase font-bold tracking-tighter mb-1.5">Precio</p>
                             <p class="text-2xl font-orbitron font-black text-transparent bg-gradient-to-r ${priceGradient} bg-clip-text">$${p.price}</p>
                         </div>
-                        <button onclick="event.stopPropagation(); redirectToWhatsApp('${p.name}', '$${p.price}')" class="btn-buy p-3.5 rounded-xl text-white text-lg flex-shrink-0">
-                            <i class="fab fa-whatsapp"></i>
+                        <button onclick="event.stopPropagation(); redirectToWhatsApp('${p.name}', '$${p.price}')" class="btn-buy px-4 py-3 rounded-xl text-white text-xs font-bold flex items-center gap-2 flex-shrink-0" aria-label="Comprar ${p.name} por WhatsApp">
+                            <i class="fab fa-whatsapp text-base"></i> Comprar
                         </button>
                     </div>
                 `;
@@ -1185,7 +1733,7 @@
 
         function createParticles() {
             const host = document.getElementById('particles-host');
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 12; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
                 const size = Math.random() * 4 + 2;
