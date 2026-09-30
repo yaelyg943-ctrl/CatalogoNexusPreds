@@ -39,7 +39,7 @@
             font-weight: 400;
         }
 
-        /* --- BACKGROUND ANIMADO: PETALOS Y NOCHE MÍSTICA --- */
+        /* --- BACKGROUND ANIMADO: PETALOS, ÁNIMAS Y NOCHE MÍSTICA --- */
         .bg-container {
             position: fixed;
             top: 0;
@@ -48,7 +48,14 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-            background: linear-gradient(135deg, #0e101f 0%, #161931 50%, #0d0f1c 100%);
+            background: linear-gradient(135deg, #0a0c16 0%, #161931 50%, #080912 100%);
+            background-size: 200% 200%;
+            animation: bgShift 20s ease infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .bg-grid {
@@ -71,30 +78,31 @@
             to { transform: perspective(500px) rotateX(15deg) translateY(60px); }
         }
 
-        .particle {
+        /* --- SISTEMA DE PARTÍCULAS INTERACTIVO --- */
+        #interactive-canvas {
             position: absolute;
-            background: var(--brand-main);
-            /* Petal shape */
-            border-radius: 50% 0 50% 50%;
-            opacity: 0.4;
-            filter: blur(1px);
-            animation: fall infinite linear;
-            box-shadow: 0 0 10px var(--brand-main-glow);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Evita que el canvas bloquee los clics en los botones */
+            z-index: 1;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
-        }
-
+        /* Esferas místicas respirando y parallax */
         .glow-sphere {
             position: absolute;
             border-radius: 50%;
             filter: blur(90px);
             z-index: -1;
             opacity: 0.35;
+            animation: pulseGlow 10s ease-in-out infinite alternate;
+            transition: transform 0.2s ease-out; /* Suaviza el parallax */
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.1); opacity: 0.45; }
         }
 
         .glow-sphere:first-of-type {
@@ -103,6 +111,7 @@
             background: radial-gradient(circle, rgba(243, 156, 18, 0.15) 0%, transparent 70%);
             top: -20%;
             left: -10%;
+            animation-delay: 0s;
         }
 
         .glow-sphere:last-of-type {
@@ -111,6 +120,7 @@
             background: radial-gradient(circle, rgba(232, 67, 147, 0.12) 0%, transparent 70%);
             bottom: -30%;
             right: -10%;
+            animation-delay: -5s; /* Desfasado para que respiren asincrónicamente */
         }
 
         /* --- COMPONENTES DE INTERFAZ FESTIVOS --- */
@@ -127,7 +137,7 @@
         .glass-card {
             background: rgba(27, 30, 54, 0.75);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(232, 67, 147, 0.2); /* Pink border hint */
+            border: 1px solid rgba(232, 67, 147, 0.2);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             cursor: pointer;
@@ -247,24 +257,14 @@
             filter: drop-shadow(0 0 20px var(--brand-accent-glow));
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(243, 156, 18, 0.05); }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(243, 156, 18, 0.05); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { 
             background: linear-gradient(180deg, var(--brand-main), var(--brand-accent));
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--brand-accent), var(--brand-purple)); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        .masonry-grid { column-count: 1; column-gap: 1.5rem; }
-        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
-        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
-        @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
-
-        .masonry-item {
-            display: inline-block; width: 100%; margin-bottom: 1.5rem;
-            break-inside: avoid; animation: fadeIn 0.6s ease-out forwards;
-        }
 
         .hero-badge {
             background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(232, 67, 147, 0.2));
@@ -284,12 +284,6 @@
             background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
             box-shadow: 0 0 20px rgba(241, 196, 15, 0.6);
             color: #121528 !important;
-        }
-
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none; z-index: 1; opacity: 0.35;
         }
 
         html { scroll-behavior: smooth; }
@@ -430,18 +424,10 @@
             transform:translateY(-2px); background:rgba(232, 67, 147, 0.05);
             border-color:var(--brand-accent); box-shadow:0 10px 25px rgba(232, 67, 147, 0.15);
         }
-        
-        .promo-slide {
-            border:1px solid rgba(243, 156, 18, 0.2) !important;
-            background:linear-gradient(180deg, rgba(27, 30, 54, .95), rgba(18, 21, 40, .98)) !important;
-        }
-        .promo-darken { background:linear-gradient(180deg, rgba(18, 21, 40,.2), rgba(18, 21, 40,.8)); }
 
         button:focus-visible, a:focus-visible, input:focus-visible {
             outline: 2px solid var(--brand-accent); outline-offset: 3px;
         }
-        
-        #announcementBanner { box-shadow:0 0 30px var(--brand-purple-glow) !important; }
 
         @media (max-width: 767px) {
             .hero-clean { padding-top: 2.1rem; }
@@ -464,7 +450,8 @@
         <div class="bg-grid"></div>
         <div class="glow-sphere" id="sphere1"></div>
         <div class="glow-sphere" id="sphere2"></div>
-        <div id="particles-host"></div>
+        <!-- Canvas Interactivo -->
+        <canvas id="interactive-canvas"></canvas>
     </div>
 
     <!-- Modal de Descripción -->
@@ -487,7 +474,7 @@
         <div class="container mx-auto px-4 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4 cursor-pointer group" onclick="showHome()">
                 <div class="relative">
-                    <img src="image.png" 
+                    <img src="https://via.placeholder.com/150/e84393/ffffff?text=NP" 
                          onerror="this.src='https://via.placeholder.com/150/e84393/ffffff?text=NP'; this.onerror=null;" 
                          alt="NexusPreds Logo" 
                          class="w-12 h-12 md:w-14 md:h-14 rounded-lg logo-glow object-contain bg-gradient-to-br from-orange-500/20 to-pink-500/20 p-2 border border-pink-500/30 group-hover:scale-105 transition-transform">
@@ -598,25 +585,20 @@
                 <!-- Contenedor del Carrusel -->
                 <div id="promoCarousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 px-[5vw] md:px-[calc(50%-450px)] no-scrollbar scroll-smooth py-4 items-stretch">
                     
-                    <!-- STREAMING CHUNK: Renderizando promociones full-bleed... -->
                     <!-- PROMOCIÓN GEMINI -->
                     <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[450px] md:min-h-[400px] relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(243,156,18,0.2)] border border-orange-500/30 group">
                         
-                        <!-- Imagen de fondo que abarca todo -->
-                        <img src="image_301d41.jpg" alt="Gemini AI" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80'" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Gemini AI" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
                         
-                        <!-- Degradado oscuro para que el texto sea legible (Oscuro a la izquierda/abajo, transparente a la derecha) -->
                         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#121528] via-[#121528]/90 to-transparent z-10"></div>
                         <div class="absolute inset-0 bg-orange-500/10 mix-blend-overlay z-10"></div>
 
-                        <!-- Etiqueta de Precio Flotante -->
                         <div class="absolute top-6 right-6 z-30 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-3 text-right shadow-2xl transition-transform group-hover:-translate-y-1">
                             <span class="block text-orange-400 text-[10px] font-bold uppercase tracking-widest mb-1">Desde</span>
                             <span class="block text-3xl font-orbitron font-black text-white leading-none mb-1">$60</span>
                             <span class="block text-gray-300 text-[10px]">1, 3 o 6 meses</span>
                         </div>
 
-                        <!-- Contenido Principal -->
                         <div class="relative z-20 w-full h-full p-8 md:p-12 flex flex-col justify-end md:justify-center max-w-xl">
                             <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="bg-orange-500/20 border border-orange-500/30 text-orange-300 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm"><i class="fas fa-brain mr-1"></i> Inteligencia Artificial</span>
@@ -636,21 +618,17 @@
                     <!-- PROMOCIÓN PRIME VIDEO -->
                     <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[450px] md:min-h-[400px] relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(232,67,147,0.2)] border border-pink-500/30 group">
                         
-                        <!-- Imagen de fondo que abarca todo -->
                         <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80" alt="Prime Video" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
                         
-                        <!-- Degradado oscuro -->
                         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#121528] via-[#121528]/90 to-transparent z-10"></div>
                         <div class="absolute inset-0 bg-pink-500/10 mix-blend-overlay z-10"></div>
 
-                        <!-- Etiqueta de Precio Flotante -->
                         <div class="absolute top-6 right-6 z-30 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-3 text-right shadow-2xl transition-transform group-hover:-translate-y-1">
                             <span class="block text-pink-400 text-[10px] font-bold uppercase tracking-widest mb-1">Promoción</span>
                             <span class="block text-3xl font-orbitron font-black text-white leading-none mb-1">$50</span>
                             <span class="block text-gray-300 text-[10px]">Por 1 mes</span>
                         </div>
 
-                        <!-- Contenido Principal -->
                         <div class="relative z-20 w-full h-full p-8 md:p-12 flex flex-col justify-end md:justify-center max-w-xl">
                             <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="bg-pink-500/20 border border-pink-500/30 text-pink-300 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm"><i class="fas fa-film mr-1"></i> Cine y Series</span>
@@ -675,21 +653,17 @@
                     <!-- PROMOCIÓN NETFLIX -->
                     <div class="snap-center shrink-0 w-[90vw] max-w-[900px] min-h-[450px] md:min-h-[400px] relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(231,76,60,0.2)] border border-red-500/30 group">
                         
-                        <!-- Imagen de fondo que abarca todo -->
                         <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1200&q=80" alt="Netflix" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
                         
-                        <!-- Degradado oscuro -->
                         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#121528] via-[#121528]/90 to-transparent z-10"></div>
                         <div class="absolute inset-0 bg-red-500/10 mix-blend-overlay z-10"></div>
 
-                        <!-- Etiqueta de Precio Flotante -->
                         <div class="absolute top-6 right-6 z-30 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl p-3 text-right shadow-2xl transition-transform group-hover:-translate-y-1">
                             <span class="block text-red-400 text-[10px] font-bold uppercase tracking-widest mb-1">Precio</span>
                             <span class="block text-3xl font-orbitron font-black text-white leading-none mb-1">$80</span>
                             <span class="block text-gray-300 text-[10px]">Por perfil</span>
                         </div>
 
-                        <!-- Contenido Principal -->
                         <div class="relative z-20 w-full h-full p-8 md:p-12 flex flex-col justify-end md:justify-center max-w-xl">
                             <div class="flex flex-wrap gap-2 mb-4">
                                 <span class="bg-red-500/20 border border-red-500/30 text-red-300 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm"><i class="fas fa-fire mr-1"></i> Más Vendido</span>
@@ -726,11 +700,11 @@
                         <span class="search-kicker text-pink-400 bg-pink-500/10 border-pink-500/30"><i class="fas fa-wand-magic-sparkles"></i> Búsqueda rápida</span>
                         <h4>Una vista intuitiva para encontrar tu producto</h4>
                         <p>Selecciona la categoría principal y explora nuestras opciones de streaming, música, inteligencia artificial y herramientas de diseño.</p>
-                        <div class="quick-tags">
-                            <span class="quick-tag hover:border-orange-400 hover:text-orange-300 transition-colors cursor-default"><i class="fas fa-film text-orange-400"></i> Series</span>
-                            <span class="quick-tag hover:border-pink-400 hover:text-pink-300 transition-colors cursor-default"><i class="fas fa-music text-pink-400"></i> Música</span>
-                            <span class="quick-tag hover:border-purple-400 hover:text-purple-300 transition-colors cursor-default"><i class="fas fa-robot text-purple-400"></i> IA</span>
-                            <span class="quick-tag hover:border-green-400 hover:text-green-300 transition-colors cursor-default"><i class="fas fa-palette text-green-400"></i> Diseño</span>
+                        <div class="quick-tags mt-4 flex gap-2 flex-wrap">
+                            <span class="text-xs px-3 py-1 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-300 cursor-default"><i class="fas fa-film text-orange-400 mr-1"></i> Series</span>
+                            <span class="text-xs px-3 py-1 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 cursor-default"><i class="fas fa-music text-pink-400 mr-1"></i> Música</span>
+                            <span class="text-xs px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 cursor-default"><i class="fas fa-robot text-purple-400 mr-1"></i> IA</span>
+                            <span class="text-xs px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-300 cursor-default"><i class="fas fa-palette text-green-400 mr-1"></i> Diseño</span>
                         </div>
                     </div>
                     <div class="search-image-panel border-orange-500/30">
@@ -739,22 +713,22 @@
                             <input id="homeSearchInput" class="home-search-input" type="search" autocomplete="off" placeholder="Busca Netflix, Spotify, Gemini, Canva..." aria-label="Buscar productos en NexusPreds">
                             <button type="submit" class="home-search-button hover:bg-orange-500"><i class="fas fa-arrow-right"></i><span class="hidden sm:inline">Buscar</span></button>
                         </form>
-                        <div class="search-app-grid">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <button type="button" class="search-app-card hover:border-orange-400" onclick="openQuickCategory('video')">
-                                <div class="search-app-icon text-orange-400 bg-orange-500/10 border-orange-500/20">🎬</div>
-                                <div class="search-app-text"><strong>Streaming</strong><small>Netflix, Prime Video, Disney+ y más.</small></div>
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-orange-400 bg-orange-500/10 border border-orange-500/20 text-xl flex-shrink-0">🎬</div>
+                                <div class="text-sm"><strong>Streaming</strong><br><small class="text-gray-400">Netflix, Prime, Disney...</small></div>
                             </button>
                             <button type="button" class="search-app-card hover:border-pink-400" onclick="openQuickCategory('music')">
-                                <div class="search-app-icon text-pink-400 bg-pink-500/10 border-pink-500/20">🎵</div>
-                                <div class="search-app-text"><strong>Música</strong><small>Spotify, Deezer y YouTube Premium.</small></div>
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-pink-400 bg-pink-500/10 border border-pink-500/20 text-xl flex-shrink-0">🎵</div>
+                                <div class="text-sm"><strong>Música</strong><br><small class="text-gray-400">Spotify, YouTube Premium...</small></div>
                             </button>
                             <button type="button" class="search-app-card hover:border-purple-400" onclick="openQuickCategory('ia')">
-                                <div class="search-app-icon text-purple-400 bg-purple-500/10 border-purple-500/20">🤖</div>
-                                <div class="search-app-text"><strong>Inteligencia Artificial</strong><small>Gemini, ChatGPT y más.</small></div>
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-purple-400 bg-purple-500/10 border border-purple-500/20 text-xl flex-shrink-0">🤖</div>
+                                <div class="text-sm"><strong>Inteligencia</strong><br><small class="text-gray-400">Gemini, ChatGPT...</small></div>
                             </button>
                             <button type="button" class="search-app-card hover:border-green-400" onclick="openQuickCategory('diseno')">
-                                <div class="search-app-icon text-green-400 bg-green-500/10 border-green-500/20">🎨</div>
-                                <div class="search-app-text"><strong>Diseño y apps</strong><small>Canva, CapCut, Autodesk y más.</small></div>
+                                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-green-400 bg-green-500/10 border border-green-500/20 text-xl flex-shrink-0">🎨</div>
+                                <div class="text-sm"><strong>Diseño</strong><br><small class="text-gray-400">Canva, CapCut, Autodesk...</small></div>
                             </button>
                         </div>
                     </div>
@@ -1661,28 +1635,162 @@
             window.open(`https://wa.me/${num}?text=Necesito+Soporte+Técnico+Nexus`, '_blank');
         }
 
-        function createParticles() {
-            const host = document.getElementById('particles-host');
-            for (let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 8 + 4; // Slightly larger for petals
-                p.style.width = `${size}px`;
-                p.style.height = `${size}px`;
-                p.style.left = `${Math.random() * 100}%`;
-                p.style.top = `-${Math.random() * 20}%`;
-                p.style.animationDelay = `${Math.random() * 10}s`;
-                p.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                // Randomize color slightly between yellow and orange
-                p.style.background = Math.random() > 0.5 ? '#f39c12' : '#f1c40f';
-                host.appendChild(p);
+        /* STREAMING CHUNK: Inicializando Motor Canvas Interactivo... */
+        const canvas = document.getElementById('interactive-canvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 120 };
+
+        // Escuchar movimiento del ratón/touch para interactividad
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+            
+            // Efecto Parallax en las esferas de luz CSS
+            const s1 = document.getElementById('sphere1');
+            const s2 = document.getElementById('sphere2');
+            if(s1) s1.style.transform = `translate(${event.x * 0.02}px, ${event.y * 0.02}px)`;
+            if(s2) s2.style.transform = `translate(${event.x * -0.02}px, ${event.y * -0.02}px)`;
+        });
+
+        window.addEventListener('touchmove', function(event) {
+            if(event.touches.length > 0) {
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }
+        });
+
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
+
+        window.addEventListener('resize', function() {
+            if(canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initCanvas();
+            }
+        });
+
+        // Clase Partícula (Pétalos y Ánimas)
+        class Particle {
+            constructor() {
+                this.type = Math.random() > 0.45 ? 'petal' : 'spirit';
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = this.type === 'petal' ? Math.random() * 7 + 4 : Math.random() * 3 + 1.5;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = this.type === 'petal' ? Math.random() * 1.5 + 0.8 : (Math.random() * -1) - 0.5;
+                
+                // Colores temáticos
+                this.color = this.type === 'petal' 
+                    ? (Math.random() > 0.5 ? '#f39c12' : '#e67e22') // Naranjas
+                    : (Math.random() > 0.5 ? '#e84393' : '#8e44ad'); // Rosa/Morado mágico
+                
+                this.angle = Math.random() * 360;
+                this.spin = (Math.random() - 0.5) * 4;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.baseX = this.x;
+                this.swing = Math.random() * 3;
+            }
+
+            update() {
+                // Movimiento natural
+                if (this.type === 'petal') {
+                    this.y += this.speedY;
+                    this.x = this.baseX + Math.sin(this.angle * Math.PI / 180) * 20 * this.swing;
+                    this.angle += this.spin;
+                } else {
+                    this.y += this.speedY; // Suben
+                    this.x += this.speedX;
+                }
+
+                // Interactividad: Repulsión magnética con el cursor
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const maxSpeed = this.type === 'petal' ? 4 : 2;
+                        
+                        this.x -= forceDirectionX * force * maxSpeed;
+                        this.y -= forceDirectionY * force * maxSpeed;
+                        
+                        if (this.type === 'petal') this.baseX = this.x; // Suaviza la transición
+                    }
+                }
+
+                // Reciclaje de partículas al salir de pantalla
+                if (this.y > canvas.height + 50 || this.y < -50 || this.x > canvas.width + 50 || this.x < -50) {
+                    if (this.type === 'petal') {
+                        this.y = -30;
+                        this.x = Math.random() * canvas.width;
+                        this.baseX = this.x;
+                    } else {
+                        this.y = canvas.height + 30;
+                        this.x = Math.random() * canvas.width;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+                
+                if (this.type === 'petal') {
+                    ctx.rotate(this.angle * Math.PI / 180);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#f39c12';
+                    ctx.beginPath();
+                    // Forma de pétalo curvo
+                    ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = '#ffffff'; // Núcleo brillante
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = this.color;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
             }
         }
 
+        function initCanvas() {
+            if(!canvas) return;
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 12000;
+            if(numberOfParticles > 120) numberOfParticles = 120; // Límite para no afectar rendimiento
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
         window.onload = () => {
-            createParticles();
+            if(canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initCanvas();
+                animateCanvas();
+            }
             showHome();
-            initCarousel(); // Iniciar carrusel
+            initCarousel(); 
         };
 
         // --- LÓGICA DEL CARRUSEL ---
