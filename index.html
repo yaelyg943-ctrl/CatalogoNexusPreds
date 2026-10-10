@@ -639,7 +639,7 @@
                             <div class="absolute top-6 right-6 z-30 bg-black/60 backdrop-blur-md border border-purple-500/50 rounded-2xl p-3 text-right shadow-[0_0_20px_rgba(138,43,226,0.5)] transition-transform group-hover:-translate-y-1">
                                 <span class="block text-purple-400 text-[10px] font-bold uppercase tracking-widest mb-1">Conjuro Desde</span>
                                 <span class="block text-3xl font-orbitron font-black text-white leading-none mb-1">$60</span>
-                                <span class="block text-gray-300 text-[10px]">1, 3 o 6 lunas</span>
+                                <span class="block text-gray-300 text-[10px]">1, 3, 6 o 12 meses</span>
                             </div>
 
                             <div class="relative z-20 w-full h-full p-8 md:p-12 flex flex-col justify-end md:justify-center max-w-xl">
@@ -648,8 +648,8 @@
                                     <span class="bg-black/50 border border-white/20 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm"><i class="fas fa-cloud mr-1"></i> 5TB Nube</span>
                                 </div>
                                 <h4 class="text-4xl md:text-5xl font-orbitron font-black text-white leading-tight mb-4 drop-shadow-[0_0_10px_rgba(138,43,226,0.8)]">Gemini <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Avanzado</span></h4>
-                                <p class="text-gray-300 font-space text-sm md:text-base mb-8 drop-shadow-md">La inteligencia suprema en tu correo. Resuelve misterios, escribe hechizos (código) y domina tu productividad.</p>
-                                <button onclick="orderPromotion('Gemini IA + 5TB (en tu correo personal)', '60 (1M), 150 (3M) o 250 (6M)')" class="bg-gradient-to-r from-purple-700 to-indigo-900 text-white font-bold py-3.5 px-8 rounded-xl hover:scale-105 transition-all w-max flex items-center gap-3 text-sm shadow-[0_10px_25px_rgba(138,43,226,0.6)] border border-purple-400/50">
+                                <p class="text-gray-300 font-space text-sm md:text-base mb-8 drop-shadow-md">Accede a Gemini mediante invitación. Elige la duración que necesitas.</p>
+                                <button onclick="orderPromotion('Gemini por invitación', '60 (1M), 100 (3M) o 150 (6M)')" class="bg-gradient-to-r from-purple-700 to-indigo-900 text-white font-bold py-3.5 px-8 rounded-xl hover:scale-105 transition-all w-max flex items-center gap-3 text-sm shadow-[0_10px_25px_rgba(138,43,226,0.6)] border border-purple-400/50">
                                     <i class="fab fa-whatsapp text-xl text-green-400"></i> Invocar Oferta
                                 </button>
                             </div>
@@ -1042,34 +1042,1338 @@
         let currentCategory = 'all';
         let currentSearch = '';
 
-        const filters = {
-            all: [
-                { id: 'all', label: 'Todos los Hechizos' },
-                { id: 'streaming', label: 'Streaming & I.A.' }
-            ],
-            streaming: [
-                { id: 'all', label: 'Todo' },
-                { id: 'video', label: '📺 Películas' },
-                { id: 'music', label: '🎵 Música' },
-                { id: 'ia', label: '🧠 I.A.' },
-                { id: 'diseno', label: '🎨 Diseño' },
-                { id: 'otros', label: '👻 Otros' },
-                { id: 'comunidad', label: '<i class="fab fa-whatsapp mr-2 text-green-400"></i>Culto VIP', special: true, link: 'https://whatsapp.com/channel/0029VbDye8gKWEKhznvNfR0M' }
-            ]
-        };
+        const categoryFilters = [
+            { id: 'all', label: '🎃 Todos' },
+            { id: 'video', label: '📺 Streaming' },
+            { id: 'music', label: '🎵 Música' },
+            { id: 'ia', label: '🧠 Inteligencia artificial' },
+            { id: 'diseno', label: '🎨 Diseño y edición' },
+            { id: 'otros', label: '🛡️ Otros servicios' }
+        ];
+        const filters = { all: categoryFilters, streaming: categoryFilters };
 
         const products = [
-            { name: "YOUTUBE PREMIUM", val: "1 MES", type: "CUENTA COMPLETA", price: 60, universe: "streaming", cat: "streaming", icon: "fa-brands fa-youtube", color: "#FF0000", renewable: false, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "YouTube sin anuncios espectrales y en segundo plano.", benefits: ["Sin anuncios", "Segundo plano", "Descargas"] },
-            { name: "PRIME VIDEO", val: "1 MES", type: "PERFIL", price: 50, universe: "streaming", cat: "streaming", icon: "fa-brands fa-amazon", color: "#00A8E1", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Series de terror y envíos rápidos en un solo perfil.", benefits: ["Amazon Originals", "Calidad HD/4K", "Estrenos"] },
-            { name: "SPOTIFY", val: "1 MES", type: "CUENTA NUEVA", price: 65, universe: "musica", cat: "musica", icon: "fa-brands fa-spotify", color: "#1DB954", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: true, desc: "Música macabra ilimitada sin anuncios.", benefits: ["Música sin límites", "Sin anuncios", "Modo offline"] },
-            { name: "NETFLIX ESTÁNDAR", val: "1 MES", type: "PERFIL", price: 80, universe: "streaming", cat: "streaming", icon: "fa-solid fa-film", color: "#E50914", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Acceso a un perfil estándar para ver thrillers sin anuncios.", benefits: ["Sin anuncios", "Series exclusivas", "Perfil personal"] },
-            { name: "DISNEY PREMIUM", val: "1 MES", type: "PERFIL", price: 50, universe: "streaming", cat: "streaming", icon: "fa-solid fa-tv", color: "#113CCF", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Magia y deportes de ESPN en tu perfil asignado.", benefits: ["Incluye ESPN", "Marvel / Star Wars", "Calidad HD"] },
-            { name: "GEMINI", val: "1 MES", type: "INVITACIÓN", price: 60, universe: "ia", cat: "ia", icon: "fa-solid fa-robot", color: "#8a2be2", renewable: false, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Inteligencia artificial oscura de Google en tu correo.", benefits: ["1 mes Pro", "Resolución experta", "Genera código/textos"] },
-            { name: "HBO MAX", val: "1 MES", type: "PERFIL", price: 30, universe: "streaming", cat: "streaming", icon: "fa-solid fa-film", color: "#5822B4", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Las mejores series dramáticas y cine oscuro de Warner.", benefits: ["Exclusivas HBO", "Estrenos", "HD"] },
-            { name: "CRUNCHYROLL MEGA FAN", val: "1 MES", type: "PERFIL", price: 35, universe: "streaming", cat: "streaming", icon: "fa-solid fa-dragon", color: "#F47521", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "Anime sangriento sin censura ni anuncios.", benefits: ["Simulcasts", "Sin anuncios", "Offline"] },
-            { name: "CANVA", val: "1 MES", type: "CUENTA PROPIA", price: 60, universe: "software", cat: "productividad", icon: "fa-solid fa-pen-nib", color: "#00C4CC", renewable: true, delivery: "INVITACIÓN", warranty: "SI", isNew: false, desc: "Diseña tus invitaciones de Halloween en modo Pro.", benefits: ["Plantillas Pro", "Quitar fondo", "Elementos Premium"] },
-            { name: "CHAT GPT PLUS", val: "1 MES", type: "PRIVADA", price: 140, universe: "ia", cat: "ia", icon: "fa-solid fa-robot", color: "#10A37F", renewable: true, delivery: "CORREO/CONTRASEÑA", warranty: "SI", isNew: false, desc: "El modelo conversacional más poderoso. Crea imágenes terroríficas con DALL-E.", benefits: ["Acceso GPT-4", "Más rápido", "DALL-E 3"] }
-        ];
+            {
+                        "name": "YOUTUBE PREMIUM",
+                        "val": "1 MES",
+                        "type": "CUENTA COMPLETA",
+                        "price": 60,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-youtube",
+                        "color": "#FF0000",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "YouTube Premium con reproducción sin anuncios y música.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: CUENTA COMPLETA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "YOUTUBE PREMIUM",
+                        "val": "1 MES",
+                        "type": "CUENTA COMPLETA · INVITACIÓN",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-youtube",
+                        "color": "#FF0000",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "YouTube Premium con reproducción sin anuncios y música.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: CUENTA COMPLETA · INVITACIÓN",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "YOUTUBE PREMIUM",
+                        "val": "3 MESES",
+                        "type": "CUENTA COMPLETA",
+                        "price": 140,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-youtube",
+                        "color": "#FF0000",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "YouTube Premium con reproducción sin anuncios y música.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: CUENTA COMPLETA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "PRIME VIDEO SIN ANUNCIOS",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 50,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-brands fa-amazon",
+                        "color": "#00A8E1",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Prime Video sin anuncios mediante la modalidad seleccionada.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "PRIME VIDEO SIN ANUNCIOS",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 70,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-brands fa-amazon",
+                        "color": "#00A8E1",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Prime Video sin anuncios mediante la modalidad seleccionada.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "PRIME VIDEO SIN ANUNCIOS",
+                        "val": "6 MESES",
+                        "type": "PRIVADA",
+                        "price": 260,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-brands fa-amazon",
+                        "color": "#00A8E1",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Prime Video sin anuncios mediante la modalidad seleccionada.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "1 MES",
+                        "type": "CUENTA NUEVA",
+                        "price": 65,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: CUENTA NUEVA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "2 MESES",
+                        "type": "CUENTA NUEVA",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 2 MESES",
+                                    "Modalidad: CUENTA NUEVA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "3 MESES",
+                        "type": "CUENTA NUEVA",
+                        "price": 150,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: CUENTA NUEVA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "6 MESES",
+                        "type": "CUENTA NUEVA",
+                        "price": 250,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: CUENTA NUEVA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "6 MESES",
+                        "type": "CUENTA PROPIA",
+                        "price": 350,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "1 AÑO",
+                        "type": "CUENTA NUEVA",
+                        "price": 350,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: CUENTA NUEVA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "SPOTIFY PREMIUM",
+                        "val": "1 AÑO",
+                        "type": "CUENTA PROPIA",
+                        "price": 500,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-brands fa-spotify",
+                        "color": "#1DB954",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Spotify Premium para escuchar música sin anuncios.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "NETFLIX",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 80,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#E50914",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Netflix para ver películas y series.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "NETFLIX",
+                        "val": "1 MES",
+                        "type": "PRIVADA · ESTÁNDAR SIN ANUNCIOS",
+                        "price": 170,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#E50914",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Netflix para ver películas y series.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA · ESTÁNDAR SIN ANUNCIOS",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DISNEY+",
+                        "val": "1 MES",
+                        "type": "PRIVADA · ESTÁNDAR",
+                        "price": 75,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#113CCF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Disney+ en distintas modalidades; selecciona el plan exacto.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA · ESTÁNDAR",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DISNEY+",
+                        "val": "1 MES",
+                        "type": "PERFIL · PREMIUM",
+                        "price": 45,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#113CCF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Disney+ en distintas modalidades; selecciona el plan exacto.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL · PREMIUM",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DISNEY+",
+                        "val": "1 MES",
+                        "type": "PERFIL · CON 3 ESPN",
+                        "price": 50,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#113CCF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Disney+ en distintas modalidades; selecciona el plan exacto.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL · CON 3 ESPN",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DISNEY+",
+                        "val": "1 MES",
+                        "type": "PERFIL · CON 7 ESPN",
+                        "price": 55,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#113CCF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Disney+ en distintas modalidades; selecciona el plan exacto.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL · CON 7 ESPN",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DISNEY+",
+                        "val": "1 MES",
+                        "type": "PRIVADA · PREMIUM",
+                        "price": 120,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#113CCF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Disney+ en distintas modalidades; selecciona el plan exacto.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA · PREMIUM",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "GEMINI",
+                        "val": "1 AÑO",
+                        "type": "INVITACIÓN",
+                        "price": 200,
+                        "universe": "streaming",
+                        "cat": "ia",
+                        "icon": "fa-solid fa-brain",
+                        "color": "#8a2be2",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Gemini por invitación según el plazo elegido.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "GEMINI",
+                        "val": "6 MESES",
+                        "type": "INVITACIÓN",
+                        "price": 150,
+                        "universe": "streaming",
+                        "cat": "ia",
+                        "icon": "fa-solid fa-brain",
+                        "color": "#8a2be2",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Gemini por invitación según el plazo elegido.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "GEMINI",
+                        "val": "3 MESES",
+                        "type": "INVITACIÓN",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "ia",
+                        "icon": "fa-solid fa-brain",
+                        "color": "#8a2be2",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Gemini por invitación según el plazo elegido.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "GEMINI",
+                        "val": "1 MES",
+                        "type": "INVITACIÓN",
+                        "price": 60,
+                        "universe": "streaming",
+                        "cat": "ia",
+                        "icon": "fa-solid fa-brain",
+                        "color": "#8a2be2",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a Gemini por invitación según el plazo elegido.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CAPCUT PREMIUM",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 110,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-video",
+                        "color": "#27D7D6",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Herramienta de edición de video premium.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "VIX",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 45,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-play",
+                        "color": "#FF7618",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "ViX para ver series, películas y entretenimiento.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "VIX",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 25,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-play",
+                        "color": "#FF7618",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "ViX para ver series, películas y entretenimiento.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "VIX",
+                        "val": "2 MESES",
+                        "type": "PRIVADA",
+                        "price": 80,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-play",
+                        "color": "#FF7618",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "ViX para ver series, películas y entretenimiento.",
+                        "benefits": [
+                                    "Duración: 2 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "VIX",
+                        "val": "1 AÑO",
+                        "type": "PRIVADA",
+                        "price": 200,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-play",
+                        "color": "#FF7618",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "5 MESES",
+                        "isNew": false,
+                        "desc": "ViX para ver series, películas y entretenimiento.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: 5 MESES",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "CRUNCHYROLL MEGA FAN",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 35,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-dragon",
+                        "color": "#F47521",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Anime con Crunchyroll Mega Fan.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CRUNCHYROLL MEGA FAN",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 80,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-dragon",
+                        "color": "#F47521",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Anime con Crunchyroll Mega Fan.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "HBO MAX",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 30,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#7044C9",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Series y películas de HBO Max.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "HBO MAX",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 50,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#7044C9",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Series y películas de HBO Max.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CANVA",
+                        "val": "1 MES",
+                        "type": "CUENTA PROPIA",
+                        "price": 60,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-palette",
+                        "color": "#00C4CC",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Diseño gráfico en tu propia cuenta mediante invitación.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CANVA",
+                        "val": "3 MESES",
+                        "type": "CUENTA PROPIA",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-palette",
+                        "color": "#00C4CC",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Diseño gráfico en tu propia cuenta mediante invitación.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CANVA",
+                        "val": "6 MESES",
+                        "type": "CUENTA PROPIA",
+                        "price": 150,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-palette",
+                        "color": "#00C4CC",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Diseño gráfico en tu propia cuenta mediante invitación.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CANVA",
+                        "val": "12 MESES",
+                        "type": "CUENTA PROPIA",
+                        "price": 250,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-palette",
+                        "color": "#00C4CC",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Diseño gráfico en tu propia cuenta mediante invitación.",
+                        "benefits": [
+                                    "Duración: 12 MESES",
+                                    "Modalidad: CUENTA PROPIA",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "PARAMOUNT+",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 60,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-clapperboard",
+                        "color": "#147CFB",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Películas y series de Paramount+.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "PARAMOUNT+",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 30,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-clapperboard",
+                        "color": "#147CFB",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Películas y series de Paramount+.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "CHATGPT PLUS",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 140,
+                        "universe": "streaming",
+                        "cat": "ia",
+                        "icon": "fa-solid fa-robot",
+                        "color": "#10A37F",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Acceso a ChatGPT Plus según la modalidad del catálogo.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DUOLINGO",
+                        "val": "1 MES",
+                        "type": "INVITACIÓN",
+                        "price": 30,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-language",
+                        "color": "#58CC02",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Aprende idiomas con Duolingo.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DUOLINGO",
+                        "val": "3 MESES",
+                        "type": "INVITACIÓN",
+                        "price": 60,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-language",
+                        "color": "#58CC02",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Aprende idiomas con Duolingo.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DUOLINGO",
+                        "val": "6 MESES",
+                        "type": "INVITACIÓN",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-language",
+                        "color": "#58CC02",
+                        "renewable": true,
+                        "delivery": "INVITACIÓN",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Aprende idiomas con Duolingo.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: INVITACIÓN",
+                                    "Entrega: INVITACIÓN",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "APPLE TV CON MLS",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 70,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-brands fa-apple",
+                        "color": "#B9C3CE",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "NO CONFIRMADA · NOTA DE COMPATIBILIDAD EN CATÁLOGO",
+                        "isNew": false,
+                        "desc": "Apple TV con MLS. El catálogo advierte sobre compatibilidad con iPhone y iPad; consultar antes de comprar.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: NO CONFIRMADA · NOTA DE COMPATIBILIDAD EN CATÁLOGO",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "AUTODESK · TODAS LAS APPS",
+                        "val": "3 AÑOS",
+                        "type": "PRIVADA",
+                        "price": 200,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-drafting-compass",
+                        "color": "#EF3D30",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "5 MESES",
+                        "isNew": false,
+                        "desc": "Acceso a aplicaciones Autodesk. Garantía de 5 meses según catálogo.",
+                        "benefits": [
+                                    "Duración: 3 AÑOS",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: 5 MESES",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "PURE VPN",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 70,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-shield-halved",
+                        "color": "#B98CFF",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Servicio VPN.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "NORD VPN",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 70,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-shield-halved",
+                        "color": "#5277EA",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Servicio VPN de NordVPN.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "NORD VPN",
+                        "val": "3 MESES",
+                        "type": "PRIVADA",
+                        "price": 150,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-shield-halved",
+                        "color": "#5277EA",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Servicio VPN de NordVPN.",
+                        "benefits": [
+                                    "Duración: 3 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "NORD VPN",
+                        "val": "6 MESES",
+                        "type": "PRIVADA",
+                        "price": 300,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-shield-halved",
+                        "color": "#5277EA",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Servicio VPN de NordVPN.",
+                        "benefits": [
+                                    "Duración: 6 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DEEZER",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 65,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-solid fa-music",
+                        "color": "#B054E8",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Deezer para escuchar música.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DEEZER",
+                        "val": "2 MESES",
+                        "type": "PRIVADA",
+                        "price": 100,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-solid fa-music",
+                        "color": "#B054E8",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Deezer para escuchar música.",
+                        "benefits": [
+                                    "Duración: 2 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "DEEZER",
+                        "val": "4 MESES",
+                        "type": "PRIVADA",
+                        "price": 170,
+                        "universe": "streaming",
+                        "cat": "music",
+                        "icon": "fa-solid fa-music",
+                        "color": "#B054E8",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Deezer para escuchar música.",
+                        "benefits": [
+                                    "Duración: 4 MESES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "WONDERSHARE",
+                        "val": "1 AÑO",
+                        "type": "PRIVADA",
+                        "price": 500,
+                        "universe": "streaming",
+                        "cat": "diseno",
+                        "icon": "fa-solid fa-wand-magic-sparkles",
+                        "color": "#00BD98",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Herramientas de Wondershare.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "MICROSOFT OFFICE 365",
+                        "val": "1 AÑO",
+                        "type": "PRIVADA",
+                        "price": 200,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-brands fa-microsoft",
+                        "color": "#E67E22",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Aplicaciones de productividad Microsoft Office 365.",
+                        "benefits": [
+                                    "Duración: 1 AÑO",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "MINECRAFT JAVA + BEDROCK",
+                        "val": "PERMANENTE",
+                        "type": "PRIVADA",
+                        "price": 350,
+                        "universe": "streaming",
+                        "cat": "otros",
+                        "icon": "fa-solid fa-cube",
+                        "color": "#6FBF45",
+                        "renewable": false,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Minecraft Java y Bedrock.",
+                        "benefits": [
+                                    "Duración: PERMANENTE",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "No renovable"
+                        ]
+            },
+            {
+                        "name": "UNIVERSAL+",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 50,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#E0AE43",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Contenido de Universal+.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "UNIVERSAL+",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 90,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-tv",
+                        "color": "#E0AE43",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Contenido de Universal+.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "MUBI",
+                        "val": "1 MES",
+                        "type": "PERFIL",
+                        "price": 40,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#E5E5E5",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Películas y cine en MUBI.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PERFIL",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "MUBI",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 70,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-film",
+                        "color": "#E5E5E5",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Películas y cine en MUBI.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            },
+            {
+                        "name": "VIKI RAKUTEN",
+                        "val": "1 MES",
+                        "type": "PRIVADA",
+                        "price": 65,
+                        "universe": "streaming",
+                        "cat": "video",
+                        "icon": "fa-solid fa-heart",
+                        "color": "#F14957",
+                        "renewable": true,
+                        "delivery": "CORREO/CONTRASEÑA",
+                        "warranty": "SÍ",
+                        "isNew": false,
+                        "desc": "Dramas y contenido asiático de Viki Rakuten.",
+                        "benefits": [
+                                    "Duración: 1 MES",
+                                    "Modalidad: PRIVADA",
+                                    "Entrega: CORREO/CONTRASEÑA",
+                                    "Garantía: SÍ",
+                                    "Renovable"
+                        ]
+            }
+];
 
         function normalizeSearchText(value) {
             return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
@@ -1081,10 +2385,7 @@
         }
 
         function matchesCategory(product, category) {
-            if (category === 'all') return true;
-            if (category === 'video') return product.cat === 'streaming' && !isMusicProduct(product);
-            if (category === 'music') return isMusicProduct(product);
-            return product.cat === category || product.universe === category;
+            return category === 'all' || product.cat === category;
         }
 
         function openQuickCategory(category) {
@@ -1187,12 +2488,12 @@
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-            let filtered = products.filter(p => currentUniverse === 'all' ? true : p.universe === currentUniverse);
+            let filtered = [...products];
             if (currentCategory !== 'all') filtered = filtered.filter(p => matchesCategory(p, currentCategory));
             
             if (currentSearch) {
                 filtered = filtered.filter(p => {
-                    const txt = normalizeSearchText([p.name, p.desc, p.cat, ...(p.benefits||[])].join(' '));
+                    const txt = normalizeSearchText([p.name, p.val, p.type, p.delivery, p.desc, p.cat, ...(p.benefits||[])].join(' '));
                     return txt.includes(currentSearch);
                 });
             }
@@ -1205,7 +2506,7 @@
             filtered.forEach((p, i) => {
                 const card = document.createElement('div');
                 card.className = `glass-card p-6 flex flex-col h-full animate-fade-in border-t border-l border-white/5 rounded-2xl`;
-                card.style.animationDelay = `${i * 0.05}s`;
+                card.style.animationDelay = `${Math.min(i, 12) * 0.035}s`;
                 card.onclick = () => openModal(products.indexOf(p));
                 
                 const renewableTag = p.renewable 
@@ -1226,14 +2527,14 @@
                     
                     <div class="space-y-1 mb-6 text-xs text-gray-400 mt-2 font-space">
                         <div><i class="fas fa-hourglass-half text-orange-500 mr-1"></i> ${p.val}</div>
-                        <div><i class="fas fa-shield-alt text-green-500 mr-1"></i> ${p.warranty} Garantía</div>
+                        <div><i class="fas fa-shield-alt text-green-500 mr-1"></i> Garantía: ${p.warranty}</div>
                     </div>
 
                     <div class="mt-auto pt-4 border-t border-purple-900/50 flex items-center justify-between">
                         <div>
-                            <p class="text-2xl font-orbitron font-black text-white">$${p.price}</p>
+                            <p class="text-2xl font-orbitron font-black text-white">$${p.price} <span class="text-xs text-gray-400">MXN</span></p>
                         </div>
-                        <button onclick="event.stopPropagation(); redirectToWhatsApp('${p.name}', '$${p.price}')" class="bg-orange-600 hover:bg-orange-500 text-black px-4 py-2 rounded-xl font-bold flex items-center gap-2 text-sm transition-transform hover:scale-105 shadow-[0_0_10px_rgba(255,102,0,0.5)]">
+                        <button onclick="event.stopPropagation(); redirectToWhatsApp(products.indexOf(p))" class="bg-orange-600 hover:bg-orange-500 text-black px-4 py-2 rounded-xl font-bold flex items-center gap-2 text-sm transition-transform hover:scale-105 shadow-[0_0_10px_rgba(255,102,0,0.5)]">
                             <i class="fab fa-whatsapp text-lg"></i> Invocar
                         </button>
                     </div>
@@ -1261,10 +2562,10 @@
                 </div>
                 <div class="flex items-center justify-between bg-gradient-to-r from-orange-900/40 to-black p-6 rounded-2xl border border-orange-500/50 shadow-[inset_0_0_20px_rgba(255,102,0,0.2)]">
                     <div>
-                        <p class="text-xs text-gray-400 uppercase font-bold mb-1">Tributo</p>
+                        <p class="text-xs text-gray-400 uppercase font-bold mb-1">Precio de venta</p>
                         <p class="text-4xl font-orbitron font-black text-white">$${p.price}</p>
                     </div>
-                    <button onclick="redirectToWhatsApp('${p.name}', '$${p.price}')" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 text-black px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(57,255,20,0.5)] transform hover:scale-105 transition-all">
+                    <button onclick="redirectToWhatsApp(products.indexOf(p))" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 text-black px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(57,255,20,0.5)] transform hover:scale-105 transition-all">
                         <i class="fab fa-whatsapp text-2xl"></i> Hacer Pacto
                     </button>
                 </div>
@@ -1288,13 +2589,14 @@
 
         function getRandomNumber() { return WHATSAPP_NUMBERS[Math.floor(Math.random() * WHATSAPP_NUMBERS.length)]; }
         
-        function redirectToWhatsApp(name, price) {
-            const txt = `¡Saludos desde el más allá! 👻 Quiero invocar: ${name} por ${price}. ¿Cómo procedemos con el pacto?`;
+        function redirectToWhatsApp(index) {
+            const p = products[index];
+            const txt = `¡Hola! 🎃 Quiero comprar ${p.name}, ${p.val}, modalidad ${p.type}, por $${p.price} MXN. ¿Está disponible?`;
             window.open(`https://wa.me/${getRandomNumber()}?text=${encodeURIComponent(txt)}`, '_blank');
         }
 
         function orderPromotion(name, price) {
-            const txt = `¡Feliz Halloween! 🎃 Me interesa el Combo Maldito: ${name} por $${price}. ¿Aún hay almas disponibles?`;
+            const txt = `¡Feliz Halloween! 🎃 Me interesa: ${name} por $${price}. ¿Aún hay almas disponibles?`;
             window.open(`https://wa.me/${getRandomNumber()}?text=${encodeURIComponent(txt)}`, '_blank');
         }
 
